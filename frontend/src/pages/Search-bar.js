@@ -1,5 +1,5 @@
 
-/*file for the search bar */
+/*file for the search bar  currently not used */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 function SearchBar() {
@@ -28,10 +28,10 @@ function SearchBar() {
 
         
 
-    <div className="search-bar">
+    <div className="searchh-bar">
         <input
         type="search"
-        placeholder="Search for courses..."
+        placeholder="Search for course."
         onKeyDown={handleSearchKeyDown}
 />
     </div>
