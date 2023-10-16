@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
-//import { Table } from "reactstrap";
 import '../App.css'; 
-import { useNavigate } from 'react-router-dom';
-//import SearchBar from './Search-bar'; // Import the SearchBar component
-//import CourseReview from './CourseReviews';
+
+
 
 
 function SearchResults() {
@@ -21,7 +19,7 @@ function SearchResults() {
     };
 
     useEffect( () => {
-      fetchInfo();
+    fetchInfo();
     }, []);
     
     const searchItems = (searchValue) => {
@@ -37,32 +35,17 @@ function SearchResults() {
         }
     }
 
-    const navigate = useNavigate();
-    const handleSignInClick = () => {
-        navigate('/SignIn'); // Navigate to the sign-in page
-    };
-    const handleLoginClick = () => {
-        navigate('/Login'); // Navigate to the sign-in page
-    };
 
     return(
     <div className='Search_results'>
-
-        <header className=' black-bar'>
-            <h1>Search Results</h1>
-            <div className='top-right-container'>
-                <button className="sign-in-button" onClick={handleSignInClick}>Sign-In</button>
-                <button className="login-button" onClick={handleLoginClick}>Login</button>
-            </div>
-        </header>
-
-        
-                <div className='search-bar-container'>
+        <div className='search-bar-container'>
         <input
         type="search"
         placeholder="Search for courses..."
         value = {searchInput}
-        onChange={(e) => searchItems(e.target.value)}/>
+        onChange={(e) => searchItems(e.target.value)}
+        className="search-input"/>
+        
         </div>
 
         {searchInput.length > 1 ? (
@@ -85,12 +68,10 @@ function SearchResults() {
                                 <td>{item.ccode} {item.cname} </td>
                             </tr>
                             </table>
-                       );
-                   }
+                            );
+                }
                 ))
                 }
-        
-        <div className="bottom-black-bar"><p>Footer content here</p></div>
     </div>
     );
 

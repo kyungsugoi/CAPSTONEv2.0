@@ -82,14 +82,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user_DB',
-        'USER': 'root',
-        'PASSWORD': 'Soo!0112',
-        'HOST': '127.0.0.1',
+        'NAME': 'capstoneDB',
+        'USER': 'okpass',
+        'PASSWORD': 'kyungsoo',
+        'HOST': 'capstone.c0i3hi30knjs.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

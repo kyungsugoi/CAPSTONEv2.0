@@ -2,7 +2,7 @@
 import React from 'react';
 import '../App.css'; 
 import { useNavigate } from 'react-router-dom';
-import SearchBar from './Search-bar'; // Import the SearchBar component
+import SearchResults from './SearchResult';
 
 function LandingPage() {
     
@@ -31,7 +31,7 @@ function LandingPage() {
 
                 <div className='top-right-container'>
                 <button className="sign-in-button" onClick={handleSignInClick}>
-                Sign-In</button>
+                Sign-Up</button>
                 <button className="login-button" onClick={handleLoginClick}>
                 Login</button>
                 </div>
@@ -44,13 +44,13 @@ function LandingPage() {
                 <p> Enter your course to get started</p>
                 </div>
                 <div className='search-bar-container'>
-                <SearchBar/>
+                <SearchResults/>
                 </div>
-				{/* <div className="Course-Placeholder">
+				<div className="Course-Placeholder">
 					<button className="course-button" onClick={() => navigate('/Courses')}>
 						Course name
 					</button>
-				</div> */}
+				</div>
                 {/* <button className="course-button" onClick={handleCourseClick}>
                 View Courses</button> */}
             </div>
