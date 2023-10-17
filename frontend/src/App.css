@@ -171,24 +171,41 @@
 }
 
 .course-information-container {
+	background-color: #d0caca; /* Grey background color */
+	padding: 10px;
+	margin: 10px auto; /* Center-align the rectangles */
+	width: 90%; /* Adjust the width as needed */
+	margin-top: 50px;
 	display: flex;
+	height: 200px;
 }
 
-.course-description {
-	background-color: #d0caca; /* Grey background color */
-	padding: 80px; /* Adjust the padding as needed */
-	margin: 10px;
-	margin-top: 50px;
-	margin-right: 20px; /* Add margin to separate the section*/
-	width: 45%;
-	display: inline-block;
+.description-left-section,
+.description-right-section {
+  flex: 2;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+
+.description-right-section {
+	flex: 1; /* Each section takes up an equal amount of space (50% each) */
+}
+
+.course-description-header {
+	text-align: center;
 }
 
 .course-tags{
 	background-color: #d0caca; /* Grey background color */
-	padding: 80px;
-	margin-right: 10px;
-	display: inline-block;
+	display: inline-flex;
+	height: 250px;
+	width: 20%;
+	align-content: center;
+
 }
 
 .bottom-center {
@@ -209,4 +226,64 @@
 .bottom-center button {
   font-size: 20px; /* Increase the font size for the button text */
   padding: 10px 20px; /* Increase the button's padding for larger size */
+}
+
+.course-reviews-container {
+	background-color: #d0caca; /* Grey background color */
+	padding: 10px;
+	margin: 10px auto; /* Center-align the rectangles */
+	width: 90%; /* Adjust the width as needed */
+	margin-top: 50px;
+	display: flex;
+	height: 200px;
+  }
+
+.review-left-section,
+.review-middle-section,
+.review-right-section {
+  flex: 1;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+.review-left-section {
+	flex: 1;
+}
+
+.review-middle-section {
+	flex: 2;
+}
+
+.review-right-section {
+	flex: 1;
+}
+
+.difficulty-tag {
+	background-color: #829ac2;
+	width: 120px;
+	height: 30px;
+	margin: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+.workload-tag {
+	background-color: #829ac2;
+	width: 120px;
+	height: 30px;
+	margin: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+.misc-tag {
+	background-color: #829ac2;
+	width: 60px;
+	height: flex;
+	margin: 10px;
+	display: inline-flex;
+	justify-content: center;
 }
