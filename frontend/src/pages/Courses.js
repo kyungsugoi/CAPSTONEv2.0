@@ -1,18 +1,10 @@
 import React from 'react';
 import '../App.css'; 
 import { useNavigate } from 'react-router-dom';
-import CourseReview from './CourseReviews';
 
 function Courses() {
 
 	const navigate = useNavigate();
-
-	const courseReviews = [
-        // Array of course reviews with their data
-        { title: 'Review 1', author: 'Author 1', rating: 4.5, text: 'Lorem ipsum...' },
-        { title: 'Review 2', author: 'Author 2', rating: 3.8, text: 'Lorem ipsum...' }
-        // ...
-    ];
 
 	return( 
 		<div className='courses-container'> 
@@ -30,20 +22,36 @@ function Courses() {
 					
 			</header>
 
-			<div className="Course-information-container">
-				<header className="course-description" > 
-					<h1>Course Description Here</h1>
-				</header>
-				<header className="course-tags">
-					<h1>Course Tags Here</h1>
-				</header>
+			<div className="course-information-container">
+				<div className="description-left-section">
+					<h1 className="course-description-header">CMPT101</h1>
+					<p>This is an introductory computer science course where students learn basic algorithms and basic python coding. Students are also introduced to the assembly language of the computer.</p>
+				</div>
+				<div className="description-right-section">
+				<div className="difficulty-tag">Difficulty: 3/5</div>
+					<div className="workload-tag">workload: 3/5</div>
+					<div className="misc-tag">Group Work</div>
+					<div className="misc-tag">Weekly quizzes</div>
+					<div className="misc-tag">Weekly quizzes</div>
+				</div>
 			</div>
 
 			<div className='course-reviews-container'>
-				{courseReviews.map((review, index) => (
-				// Render the CourseReview component for each review
-				<CourseReview key={index} review={review} />
-				))}
+				<div className="review-left-section">
+					<p>Username</p>
+					<p>Professor: Cobzas</p>
+					<p>Grade received: A-</p>
+				</div>
+     			<div className="review-middle-section">
+					<p>This class was very interesting, everyone should try and take this it if they can!</p>
+				</div>
+      			<div className="review-right-section">
+					<div className="difficulty-tag">Difficulty: 3/5</div>
+					<div className="workload-tag">workload: 3/5</div>
+					<div className="misc-tag">Group Work</div>
+					<div className="misc-tag">Weekly quizzes</div>
+					<div className="misc-tag">Weekly quizzes</div>
+				</div>
 			</div>
 
 			<div className="bottom-black-bar">
