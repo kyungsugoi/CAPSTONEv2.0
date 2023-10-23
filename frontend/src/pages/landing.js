@@ -7,9 +7,7 @@ import SearchResults from './SearchResult';
 function LandingPage() {
     
     const navigate = useNavigate();
-    const handleSignInClick = () => {
-        navigate('/SignIn'); // Navigate to the sign-in page
-    };
+    
     const handleLoginClick = () => {
         navigate('/Login'); // Navigate to the sign-in page
     };
@@ -30,8 +28,6 @@ function LandingPage() {
 
 
                 <div className='top-right-container'>
-                <button className="sign-in-button" onClick={handleSignInClick}>
-                Sign-Up</button>
                 <button className="login-button" onClick={handleLoginClick}>
                 Login</button>
                 </div>
@@ -69,8 +65,8 @@ function LandingPage() {
             <div className="bottom-center">
                 <h1> Interested?</h1>
                 <p>Sign-up now and never be caught off guard again</p>
-                <button className="sign-in-button" onClick={handleSignInClick}>
-                Sign-up</button>
+                <button className="Log-in-button" onClick={handleLoginClick}>
+                Log-In</button>
             </div>"
 
 
