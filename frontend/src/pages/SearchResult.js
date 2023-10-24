@@ -1,26 +1,22 @@
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
-import '../App.css'; 
-
-
-
+import '../App.css';
 
 function SearchResults() {
 
-    const url = "http://127.0.0.1:8000/api/courses/";
     const [data, setData] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
     const fetchInfo = async() => {
         return axios
-        .get(`${url}?search=${searchInput}`)
+        .get(`api/courses/?search=${searchInput}`)
         .then((res) => setData(res.data));
     };
 
     useEffect( () => {
     fetchInfo();
-    }, []);
+    });
     
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
