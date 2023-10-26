@@ -13,7 +13,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 class CourseRepresentationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Course
-        fields = ('cid', 'ccode', 'cname')
+        fields = ('ccode', 'cname')
 
 class CourseSerializer(serializers.ModelSerializer):
     course = ReviewSerializer(many=True, read_only=True)
