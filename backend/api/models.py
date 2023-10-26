@@ -17,4 +17,5 @@ class Review(models.Model):
     course_id = models.ForeignKey('Course', related_name='course', on_delete=models.CASCADE, db_column='course_id')
     term = models.CharField(max_length=20)
     year = models.IntegerField()
+    grade = models.CharField(max_length=10, default='pass')
     comment = models.TextField()
