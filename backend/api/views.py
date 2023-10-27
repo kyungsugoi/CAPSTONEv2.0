@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, viewsets
-from .serializers import ReviewSerializer, StudentSerializer, CourseSerializer
-from .models import Review, Student, Course
+from .serializers import ReviewSerializer, StudentSerializer, CourseSerializer, TagSerializer
+from .models import Review, Student, Course, Tag
+
 
 # Create your views here.
 
@@ -25,3 +26,7 @@ class ReviewView(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     # def get_queryset(self):
     #     qs = Review.objects.all()
+class TagView(viewsets.ModelViewSet):
+    serializer_class = TagSerializer
+    queryset = Tag.objects.all()
+    

@@ -19,3 +19,9 @@ class Review(models.Model):
     year = models.IntegerField()
     grade = models.CharField(max_length=10, default='pass')
     comment = models.TextField()
+    
+class Tag(models.Model):
+    tagid = models.AutoField(primary_key = True)
+    tagname = models.CharField(max_length = 30)
+    value = models.IntegerField()
+    
