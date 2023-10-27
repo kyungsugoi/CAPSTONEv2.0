@@ -8,6 +8,7 @@ import SearchResults from './pages/SearchResult'
 import Courses from './pages/Courses'
 import CourseList from './pages/CourseList'
 import TagList from './pages/TagList';
+import ViewProfile from './pages/ViewProfile';
 
 function App() {
   return (
@@ -16,11 +17,13 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/search" element={<SearchResults />} />
+          
 		<Route path="/Courses" element={<Courses />} />
 		<Route path="/CourseList" element={<CourseList />} /> 
 		<Route path="/TagList" element={<TagList />} />
+    <Route path="/ViewProfile" element={<ViewProfile />} />
 
-        {/* Add routes for other pages */}
+        {/* Add routes for other pages */ }
       </Routes>
     </Router>
   );

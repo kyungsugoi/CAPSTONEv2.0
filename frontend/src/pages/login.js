@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import '../App.css'; 
 
 
 function Login() {
     const [user, setUser] = useState({});
 
+    const navigate = useNavigate(); // Initialize the navigate function
+    
+
 
 
     function handleCallbackResponse(response){
+        
         console.log("Encoded JWT ID token: " + response.credential);
         var userObject = jwt_decode(response.credential); 
-        console.log(userObject);
+        console.log("hello",userObject);
         setUser(userObject);
         document.getElementById("signInDiv").hidden = true;
+        navigate('/ViewProfile', { state: { user: userObject } });
+        
     }
 
 
@@ -54,14 +62,16 @@ function Login() {
             {Object.keys(user).length !== 0 && 
             <button onClick={(e) => handleSignOut(e)}>Sign out</button>}
             
-            {
-                user && 
-                <div>
+            {user &&
+            <div>
+                    
                     <img src={user.picture} alt=''></img>
                     <h3>{user.name}</h3>
                     </div>}
-            
+                    
+                    {/* Pass user data to the view-profile component */}
                     </div>
+                    
         </div>
 
     );
