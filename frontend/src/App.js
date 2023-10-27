@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import LandingPage from  './pages/landing/land';
+import LandingPage from  './pages/landing';
 import Login from './pages/login'
 import SearchResults from './pages/SearchResult'
 import Courses from './pages/Courses'
