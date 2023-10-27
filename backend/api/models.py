@@ -11,3 +11,9 @@ class Student(models.Model):
     id = models.AutoField(primary_key = True)
     name = models.CharField(max_length = 100)
     email = models.EmailField()
+    
+class Tag(models.Model):
+    tagid = models.AutoField(primary_key = True)
+    tagname = models.CharField(max_length = 30)
+    value = models.IntegerField()
+    
