@@ -7,6 +7,13 @@
   width: 100%;
 }
 
+.top-bar {
+  position: relative; /* Ensure positioning context */
+  background: black;
+  height: 100px;
+  width: 100%;
+}
+
 
 
 .Connection-container {
@@ -312,6 +319,15 @@
 .login-content {
   z-index: 1; /* Place the content above the background image */
   /* Add styles for your login content here */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.View-Profile-center {
   display: flex;
   flex-direction: column;
   align-items: center;
