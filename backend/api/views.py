@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, viewsets
-from .serializers import StudentSerializer, CourseSerializer
-from .models import Student, Course
+from .serializers import StudentSerializer, CourseSerializer, TagSerializer
+from .models import Student, Course, Tag
 
 # Create your views here.
 
@@ -19,4 +19,8 @@ class CourseView(viewsets.ModelViewSet):
 class StudentView(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
     queryset = Student.objects.all()
+    
+class TagView(viewsets.ModelViewSet):
+    serializer_class = TagSerializer
+    queryset = Tag.objects.all()
     
