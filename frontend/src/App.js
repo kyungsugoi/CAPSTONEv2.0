@@ -7,6 +7,7 @@ import Login from './pages/login'
 import SearchResults from './pages/SearchResult'
 import Courses from './pages/Courses'
 import CourseList from './pages/CourseList'
+import Reviews from './pages/Reviews'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
 		    <Route path="/Courses" element={<Courses />} />
 		    <Route path="/CourseList" element={<CourseList />} /> 
-
+        <Route path="/Reviews" element={<Reviews />} />
         {/* Add routes for other pages */}
       </Routes>
     </Router>
