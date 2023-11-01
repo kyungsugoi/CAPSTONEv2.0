@@ -3,8 +3,11 @@ import React from 'react';
 import '../App.css'; 
 import { useNavigate } from 'react-router-dom';
 import SearchResults from './SearchResult';
+import { useUser } from '../UserContext'; // Import the useUser hook
 
 function LandingPage() {
+
+    const { user, handleLogout } = useUser(); // Access handleLogout from the context
     
     const navigate = useNavigate();
     
@@ -15,6 +18,9 @@ function LandingPage() {
         navigate('/courses')
     }
 
+    const handleViewProfileClick = () => {
+        navigate('/ViewProfile')
+    }
 
 
     return (
@@ -28,10 +34,22 @@ function LandingPage() {
 
 
                 <div className='top-right-container'>
-                <button className="login-button" onClick={handleLoginClick}>
-                Login</button>
-                </div>
+                    {Object.keys(user).length !== 0 ? (
+                    <div>
+                        <button className="logout-button" onClick={handleLogout}>Logout</button>
+                        
+                        <button className='ViewProfile-header' onClick={handleViewProfileClick}>hey {user.name}</button>
+                        
+                    </div>
+                    ) : (
+                    <button className="login-button" onClick={handleLoginClick}>Login</button>
+                    )}
+                    
+                    </div>
             </header>
+
+
+
             <div className="logo-container">
                 <img src='/Logo.jpg' alt='' className='logo'></img>
             </div>
@@ -65,9 +83,16 @@ function LandingPage() {
             <div className="bottom-center">
                 <h1> Interested?</h1>
                 <p>Sign-up now and never be caught off guard again</p>
-                <button className="Log-in-button" onClick={handleLoginClick}>
-                Log-In</button>
-            </div>"
+
+                {Object.keys(user).length !== 0 ? (
+                    <div>
+                        <button className="ViewProfile-btn" onClick={handleViewProfileClick}>ViewProfile</button>
+                    </div>
+                    ) : (
+                        <button className="Log-in-button" onClick={handleLoginClick}>
+                        Log-In</button>
+                    )}
+            </div>
 
 
             <div className="bottom-black-bar">
