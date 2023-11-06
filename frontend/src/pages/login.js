@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../App.css'; 
-
+import { useUser } from '../UserContext'; // Import the useUser hook
 
 function Login() {
-    const [user, setUser] = useState({});
+    const { user, setUser } = useUser(); // Access user data from the context
 
     const navigate = useNavigate(); // Initialize the navigate function
     
@@ -19,7 +19,7 @@ function Login() {
         console.log("hello",userObject);
         setUser(userObject);
         document.getElementById("signInDiv").hidden = true;
-        navigate('/ViewProfile', { state: { user: userObject } });
+        navigate('/');
         
     }
 
