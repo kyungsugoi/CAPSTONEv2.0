@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../App.css'; 
-import { useNavigate } from 'react-router-dom';
+import '../App.css';
 import Popup from './popup';
 import CustomSelect from './CustomSelect';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Courses() {
 
@@ -44,10 +44,11 @@ function Courses() {
 		console.log(value);
 	}
 	
+	const {state} = useLocation();
+    const {code, name, description} = state;
 	return( 
 		<div className='courses-container'> 
 			<header className="black-bar" > 
-					<h1>Course Name Here</h1>
 					<div className='top-right-container'>
 					<button className="sign-in-button" onClick={() => navigate('/SignIn')}>
 					Sign-In
@@ -62,8 +63,8 @@ function Courses() {
 
 			<div className="course-information-container">
 				<div className="description-left-section">
-					<h1 className="course-description-header">CMPT101</h1>
-					<p>This is an introductory computer science course where students learn basic algorithms and basic python coding. Students are also introduced to the assembly language of the computer.</p>
+				<h1 className="course-description-header">{code} - {name}</h1>
+                        <p>{description}</p>
 				</div>
 				<div className="description-right-section">
 				<div className="difficulty-tag">Difficulty: 3/5</div>

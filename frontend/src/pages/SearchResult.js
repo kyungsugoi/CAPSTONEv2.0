@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import '../App.css'; 
 
 
@@ -20,7 +22,7 @@ function SearchResults() {
 
     useEffect( () => {
     fetchInfo();
-    }, []);
+    } );
     
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
@@ -34,6 +36,7 @@ function SearchResults() {
             setFilteredResults(data)
         }
     }
+    const navigate = useNavigate();
 
 
     return(
@@ -49,23 +52,23 @@ function SearchResults() {
         </div>
 
         {searchInput.length > 1 ? (
-                    filteredResults.map((item) => {
+                    filteredResults.slice(0,3).map((item) => {
                         
                         return (
-                            <table width = "200px" align = "center">
+                            <table width = "500px" align = "center">
 
                             <tr>
-                                <td>{item.ccode} {item.cname} </td>
+                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                         );
                     }
                 ) ): (
-                    data.map((item) => {
+                    data.slice(0,3).map((item) => {
                         return (
-                            <table width = "200px" align = "center">
+                            <table width = "500px" align = "center">
                             <tr>
-                                <td>{item.ccode} {item.cname} </td>
+                                <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                             );

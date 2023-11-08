@@ -10,6 +10,7 @@ import CourseList from './pages/CourseList'
 import Reviews from './pages/Reviews'
 import TagList from './pages/TagList';
 import ViewProfile from './pages/ViewProfile';
+import CourseReview from './pages/CourseReviews';
 
 function App() {
   return (
@@ -23,10 +24,12 @@ function App() {
         <Route path="/Reviews" element={<Reviews />} />
         {/* Add routes for other pages */}
           
-		<Route path="/Courses" element={<Courses />} />
+		<Route path="/Course" element={<Courses />} />
 		<Route path="/CourseList" element={<CourseList />} /> 
 		<Route path="/TagList" element={<TagList />} />
     <Route path="/ViewProfile" element={<ViewProfile />} />
+		    <Route path="/Reviews" element={<CourseReview />} /> 
+
 
         {/* Add routes for other pages */ }
       </Routes>
