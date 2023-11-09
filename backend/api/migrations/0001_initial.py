@@ -28,4 +28,12 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254)),
             ],
         ),
+        migrations.CreateModel(
+            name='Tag',
+            fields=[
+                ('tagid', models.AutoField(primary_key=True, serialize=False)),
+                ('tagname', models.CharField(max_length=30)),
+                ('value', models.IntegerField()),
+            ],
+        ),
     ]

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Modal from "../components/TagModal";
-import ModalDel from "../components/ModalDel";
+import ModalDel from "../components/ModalDel_Tag";
 import { Table } from "reactstrap";
+import CustomSelect from './CustomSelect';
 
 class TagList extends Component {
   state = {
@@ -12,6 +13,7 @@ class TagList extends Component {
       value: "",
     },
     tagList: [],
+	tagNames: [],	// to send to custom Select
   };
 
   componentDidMount() {
@@ -21,7 +23,14 @@ class TagList extends Component {
   refreshList = () => {
     axios
       .get("/api/tags/") // Update the API endpoint to match your dataset
-      .then((res) => this.setState({ tagList: res.data }))
+      .then((res) => {
+	  	this.setState({ 
+			tagList: res.data,
+			tagNames: res.data.map((item) => ({
+			label: item.tagname,
+			})),
+		});		
+	})
       .catch((err) => console.log(err));
   };
 
@@ -52,6 +61,12 @@ class TagList extends Component {
     axios
       .delete(`/api/tags/${item.tagid}/`) // Update the API endpoint to match your dataset
       .then((res) => this.refreshList());
+  };
+
+  handleSelectChange = (selectedOption) => {
+    this.setState({
+      selectedOption, // Assuming you have a 'selectedOption' state in your component
+    });
   };
 
   createItem = () => {
@@ -107,6 +122,11 @@ class TagList extends Component {
         <button onClick={this.deleteItem} className="btn btn-danger mr-2">
           Delete Tag
         </button>
+		<CustomSelect
+          isMulti={true}
+          onChange={this.handleSelectChange}
+          tagNames={this.state.tagNames} // Pass tagNames as a prop
+        />
         {this.state.modal ? (
           <Modal
             activeItem={this.state.activeItem}
