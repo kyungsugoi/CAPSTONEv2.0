@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import '../App.css'; 
 import { useNavigate } from 'react-router-dom';
 import Popup from './popup';
@@ -21,6 +22,22 @@ function Courses() {
 		Difficulty: '',
 		Workload: '',
 	}); // State to store the review text
+
+	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
+
+	useEffect(() => {
+		axios
+		
+		  .get("/api/tags/") // Update the API endpoint to match your dataset
+		  .then((res) => {
+			// get all tag names that ar enot difficulty and workload
+			const tagNamesList = res.data.slice(10).map((item) => ({
+			  label: item.tagname,
+			}));
+			setTagNames(tagNamesList);
+		  })
+		  .catch((err) => console.log(err));
+	  }, []);
 
 	const handleAddReview = () => {
 	 // Access the review data
@@ -142,7 +159,7 @@ function Courses() {
 					onChange={handleInputChange}
 					placeholder='Write your review here'
 					/>
-					<CustomSelect isMulti={true} onChange={onChangeInput} />
+					<CustomSelect isMulti={true} onChange={onChangeInput} tagNames={tagNames} />
 					
 					<button onClick={handleAddReview}>Submit Review</button>
 
