@@ -113,7 +113,7 @@ class CourseList extends Component {
       {this.state.modaldel ? (
         <ModalDel
           activeItem={this.state.activeItem}
-          toggle={this.toggledel}
+          toggle={this.toggledel} 
           onSave={this.handleDelete}
         />
       ): null}

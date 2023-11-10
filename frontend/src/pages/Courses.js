@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import '../App.css'; 
-import { useNavigate } from 'react-router-dom';
 import Popup from './popup';
 import CustomSelect from './CustomSelect';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Courses() {
 
@@ -21,6 +23,22 @@ function Courses() {
 		Difficulty: '',
 		Workload: '',
 	}); // State to store the review text
+
+	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
+
+	useEffect(() => {
+		axios
+		
+		  .get("/api/tags/") // Update the API endpoint to match your dataset
+		  .then((res) => {
+			// get all tag names that ar enot difficulty and workload
+			const tagNamesList = res.data.slice(10).map((item) => ({
+			  label: item.tagname,
+			}));
+			setTagNames(tagNamesList);
+		  })
+		  .catch((err) => console.log(err));
+	  }, []);
 
 	const handleAddReview = () => {
 	 // Access the review data
@@ -44,10 +62,11 @@ function Courses() {
 		console.log(value);
 	}
 	
+	const {state} = useLocation();
+    const {code, name, description} = state;
 	return( 
 		<div className='courses-container'> 
 			<header className="black-bar" > 
-					<h1>Course Name Here</h1>
 					<div className='top-right-container'>
 					<button className="sign-in-button" onClick={() => navigate('/SignIn')}>
 					Sign-In
@@ -62,8 +81,8 @@ function Courses() {
 
 			<div className="course-information-container">
 				<div className="description-left-section">
-					<h1 className="course-description-header">CMPT101</h1>
-					<p>This is an introductory computer science course where students learn basic algorithms and basic python coding. Students are also introduced to the assembly language of the computer.</p>
+				<h1 className="course-description-header">{code} - {name}</h1>
+                        <p>{description}</p>
 				</div>
 				<div className="description-right-section">
 				<div className="difficulty-tag">Difficulty: 3/5</div>
@@ -142,7 +161,7 @@ function Courses() {
 					onChange={handleInputChange}
 					placeholder='Write your review here'
 					/>
-					<CustomSelect isMulti={true} onChange={onChangeInput} />
+					<CustomSelect isMulti={true} onChange={onChangeInput} tagNames={tagNames} />
 					
 					<button onClick={handleAddReview}>Submit Review</button>
 

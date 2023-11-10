@@ -14,9 +14,6 @@ function LandingPage() {
     const handleLoginClick = () => {
         navigate('/Login'); // Navigate to the sign-in page
     };
-    const handleCourseClick = () => {
-        navigate('/courses')
-    }
 
     const handleViewProfileClick = () => {
         navigate('/ViewProfile')
@@ -60,12 +57,12 @@ function LandingPage() {
                 <div className='search-bar-container'>
                 <SearchResults/>
                 </div>
-				<div className="Course-Placeholder">
-					<button className="course-button" onClick={() => navigate('/Courses')}>
-						Course name
+				{/*<div className="Course-Placeholder">
+					<button className="course-button" onClick={() => navigate('/search')}>
+						View All Courses
 					</button>
 				</div>
-                {/* <button className="course-button" onClick={handleCourseClick}>
+                <button className="course-button" onClick={handleCourseClick}>
                 View Courses</button> */}
             </div>
 
