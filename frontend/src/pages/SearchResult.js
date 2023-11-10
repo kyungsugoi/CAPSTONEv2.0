@@ -58,7 +58,7 @@ function SearchResults() {
                             <table width = "500px" align = "center">
 
                             <tr>
-                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc} })}>{item.ccode} {item.cname} </button></td>
+                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, course: item.course} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                         );

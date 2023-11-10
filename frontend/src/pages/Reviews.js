@@ -9,11 +9,13 @@ class Reviews extends Component{
     state = {
         activeItem: {
             rid: "",
-            course_id: "",
+            course_id: {},
             term: "",
             year: "",
             grade: "",
             comment: "",
+            professor: "",
+            
         },
         reviewList: []
     };
