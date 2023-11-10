@@ -110,6 +110,25 @@
   cursor: pointer;
 }
 
+.logout-button {
+  padding: 10px 20px;
+  margin-left: 10px; /* Add margin to separate it from the Sign-In button */
+  background-color:black; /* Customize the Login button's style */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ViewProfile-user-btn {
+  padding: 10px 20px;
+  margin-left: 10px; /* Add margin to separate it from the Sign-In button */
+  background-color :#007bff; /* Customize the Login button's style */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 
 .top-right-container {
@@ -166,6 +185,27 @@
   height: auto; /* Maintain the aspect ratio */
   display: block; /* Remove extra spacing around the image */
   margin: 0 auto; /* Center-align the image horizontally */
+}
+
+
+.ViewProfile-btn {
+  padding: 10px 20px;
+  margin-left: 10px; /* Add margin to separate it from the Sign-In button */
+  background-color :black; /* Customize the Login button's style */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Log-in-button {
+  padding: 10px 20px;
+  margin-left: 10px; /* Add margin to separate it from the Sign-In button */
+  background-color :#28a745; /* Customize the Login button's style */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .course-review {
@@ -369,4 +409,81 @@
   justify-content: center;
   align-items: center;
   color: black; /* Change the font color to red (#ff0000) */
+}
+
+
+.box-view{
+  border: 2px solid white;
+  width: 500px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.tabs{
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab {
+  background: #fff; /* Set the default background color */
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid white;
+  border-top: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.active-tab {
+  border: none;
+  font-weight: bold; /* Make the text bold for the active tab */
+  background: #fff; /* Set the background color for the active tab */
+}
+
+
+.active-tab::after {
+  border: 1px solid black; /* Set the color for the underline */
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.contents{
+  position: relative;
+}
+.content{
+  display: none;
+  position: relative;
+}
+
+.active-content{
+  display:block;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: all 1s ease-in-out;
+  animation: example 0.3s;
+}
+
+@keyframes example {
+  from{
+    margin:0;
+  }
+
+  to{
+    margin-left: 10px;
+
+  }
+}
+
+.greeting-text {
+  margin-left: 30px;
+  margin-top: 100px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333; /* Choose your preferred color */
+  font-family: 'Your Preferred Font', sans-serif; /* Specify the font you want to use */
 }

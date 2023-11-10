@@ -35,7 +35,7 @@ function LandingPage() {
                     <div>
                         <button className="logout-button" onClick={handleLogout}>Logout</button>
                         
-                        <button className='ViewProfile-header' onClick={handleViewProfileClick}>hey {user.name}</button>
+                        <button className='ViewProfile-user-btn' onClick={handleViewProfileClick}>hey {user.name}</button>
                         
                     </div>
                     ) : (
