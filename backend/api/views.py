@@ -24,8 +24,7 @@ class StudentView(viewsets.ModelViewSet):
 class ReviewView(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
-    # def get_queryset(self):
-    #     qs = Review.objects.all()
+
 class TagView(viewsets.ModelViewSet):
     serializer_class = TagSerializer
     queryset = Tag.objects.all()

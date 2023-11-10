@@ -20,6 +20,8 @@ class Review(models.Model):
     professor = models.CharField(max_length = 10, default='pass')
     grade = models.CharField(max_length=10, default='pass')
     comment = models.TextField()
+    difficulty = models.IntegerField(default=0)
+    workload = models.IntegerField(default=0)
     
 class Tag(models.Model):
     tagid = models.AutoField(primary_key = True)
