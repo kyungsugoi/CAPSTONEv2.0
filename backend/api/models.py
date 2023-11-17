@@ -17,8 +17,11 @@ class Review(models.Model):
     course_id = models.ForeignKey('Course', related_name='course', on_delete=models.CASCADE, db_column='course_id')
     term = models.CharField(max_length=20)
     year = models.IntegerField()
+    professor = models.CharField(max_length = 10, default='pass')
     grade = models.CharField(max_length=10, default='pass')
     comment = models.TextField()
+    difficulty = models.IntegerField(default=0)
+    workload = models.IntegerField(default=0)
     
 class Tag(models.Model):
     tagid = models.AutoField(primary_key = True)

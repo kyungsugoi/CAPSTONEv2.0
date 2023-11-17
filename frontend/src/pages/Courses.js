@@ -4,7 +4,7 @@ import axios from "axios";
 import '../App.css'; 
 import Popup from './popup';
 import CustomSelect from './CustomSelect';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, UNSAFE_DataRouterStateContext } from 'react-router-dom';
 
 function Courses() {
 
@@ -15,15 +15,8 @@ function Courses() {
 	const togglePopup =() =>{
 		setIsOpen(!isOpen);
 	}
-
-	const [reviewData, setReviewData] = useState({
-		Professor: "",
-		Grade: '',
-		reviewText: '',
-		Difficulty: '',
-		Workload: '',
-	}); // State to store the review text
-
+	const {state} = useLocation();
+    const {id, code, name, description} = state;
 	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
 
 	useEffect(() => {
@@ -40,17 +33,42 @@ function Courses() {
 		  .catch((err) => console.log(err));
 	  }, []);
 
-	const handleAddReview = () => {
-	 // Access the review data
-	const { Difficulty,Workload,Professor, Grade, reviewText } = reviewData;
+	  const [reviewData, setReviewData] = useState({
+		course_id: {},
+		Term: "",
+		Year: "",
+		Professor: "",
+		Grade: "",
+		Comment: "",
+		Difficulty: "",
+		Workload: "",
+	}); // State to store the review text
+
+	const handleAddReview = (reviewData) => {
+		axios
+		  .put("/api/reviews/", {
+			  course_id: id,
+			  Term: Term,
+			  Year: Year,
+			  Professor: Professor,
+			  Grade: Grade,
+			  Comment: Comment,
+			  Difficulty: Difficulty,
+			  Workload: Workload
+		  })
+
+	// Access the review data
+	const { course_id, Term, Year, Professor, Grade, Comment, Difficulty, Workload } = reviewData;
 
 	 // You can handle the review submission here
 	 // For now, just log the review data
-	console.log('Professor:', Professor);
-	console.log('Grade:', Grade);
-	console.log('Review Text:', reviewText);
-	console.log("Difficulty",Difficulty);
-	console.log("Workload",Workload);
+	console.log('Term:', Term);
+	console.log('Year', Year);
+	console.log('Professor', Professor);
+	console.log('Grade', Grade);
+	console.log('ReviewText', Comment);
+	console.log('Difficulty', Difficulty);
+	console.log('Workload', Workload);
 	};
 
 	const handleInputChange = (e) => {
@@ -62,8 +80,8 @@ function Courses() {
 		console.log(value);
 	}
 	
-	const {state} = useLocation();
-    const {code, name, description} = state;
+	// const {state} = useLocation();
+    // const {id, code, name, description} = state;
 	return( 
 		<div className='courses-container'> 
 			<header className="black-bar" > 
@@ -120,23 +138,21 @@ function Courses() {
 				content={<div>
 					<h2>Add a review</h2>
 
-
 					<input 
 						type='text'
-						name="Workload"
-						value={reviewData.Workload}
+						name="Term"
+						value={reviewData.Term}
 						onChange={handleInputChange}
-						placeholder='Workload'
+						placeholder='Term(Fall/Winter)'
 					/>
 
 					<input 
-						type='text'
-						name="Difficulty"
-						value={reviewData.Difficulty}
+						type='number'
+						name="Year"
+						value={reviewData.Year}
 						onChange={handleInputChange}
-						placeholder='Difficulty'
+						placeholder='Year'
 					/>
-
 
 					<input 
 						type='text'
@@ -151,16 +167,34 @@ function Courses() {
 						name="Grade"
 						value={reviewData.Grade}
 						onChange={handleInputChange}
-						placeholder='Grade'
-					/>
+						placeholder='Letter Grade'
+					/>					
+
 					<textarea
 					rows="4"
 					cols="50"
-					name="reviewText"
-					value={reviewData.reviewText}
+					name="ReviewText"
+					value={reviewData.ReviewText}
 					onChange={handleInputChange}
 					placeholder='Write your review here'
 					/>
+
+					<input 
+						type='number'
+						name="Difficulty"
+						value={reviewData.Difficulty}
+						onChange={handleInputChange}
+						placeholder='Difficulty(1-5)'
+					/>
+					
+					<input 
+						type='number'
+						name="Workload"
+						value={reviewData.Workload}
+						onChange={handleInputChange}
+						placeholder='Workload(1-5)'
+					/>
+
 					<CustomSelect isMulti={true} onChange={onChangeInput} tagNames={tagNames} />
 					
 					<button onClick={handleAddReview}>Submit Review</button>
