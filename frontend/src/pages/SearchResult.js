@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import SearchBar from './Search-bar';
 import '../App.css'; 
 
 
@@ -41,6 +41,7 @@ function SearchResults() {
 
     return(
     <div className='Search_results'>
+        <SearchBar />
         <div className='search-bar-container'>
         <input
         type="search"
@@ -58,7 +59,7 @@ function SearchResults() {
                             <table width = "500px" align = "center">
 
                             <tr>
-                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, course: item.course} })}>{item.ccode} {item.cname} </button></td>
+                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                         );
@@ -68,7 +69,7 @@ function SearchResults() {
                         return (
                             <table width = "500px" align = "center">
                             <tr>
-                                <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc} })}>{item.ccode} {item.cname} </button></td>
+                                <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                             );
