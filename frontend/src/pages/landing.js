@@ -4,6 +4,7 @@ import '../App.css';
 import { useNavigate } from 'react-router-dom';
 import SearchResults from './SearchResult';
 import { useUser } from '../UserContext'; // Import the useUser hook
+import SearchBar from './Search-bar';
 
 function LandingPage() {
 
@@ -21,6 +22,7 @@ function LandingPage() {
 
 
     return (
+        
         <div className="landing-page">
             <header className="black-bar" >
                 <div className='Connection-container'>
@@ -53,6 +55,7 @@ function LandingPage() {
                 <img src='/Logo.jpg' alt='' className='logo'></img>
             </div>
             <div className="centered-text">
+                
                 <div className='top-text'>
                 <p> Enter your class to get started</p>
                 </div>

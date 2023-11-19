@@ -1,15 +1,41 @@
-// CourseReview.js compotant file for SearchResults.js not a page its the grey box 
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import '../App.css'; 
 
-function CourseReview({ review }) {
+function CourseReview() {
+
+    const url = "http://127.0.0.1:8000/api/courses/2/";
+    const [data, setData] = useState([
+        "cid",
+        "ccode",
+        "cname",
+        "cdesc",
+        "course",
+    ]);
+
+    const fetchInfo = async() => {
+        return axios
+        .get(`${url}`)
+        .then((res) => setData(res.data));
+    };
+
+    useEffect( () => {
+    fetchInfo();
+    } );
+
     return (
     <div className="course-review">
         <div className="review-content">
-        {/* Display review details (e.g., title, author, rating, text) */}
-        <h2>{review.title}</h2>
-        <p>By: {review.author}</p>
-        <p>Rating: {review.rating}</p>
-        <p>{review.text}</p>
+        {data.cname}
+        {data.course.map((item) => {
+                        return (
+                            <table width = "500px" align = "center">
+                            <tr>
+                                <td>{item.comment}</td>
+                            </tr>
+                            </table>
+                            );
+                        })}
         </div>
     </div>
     );
