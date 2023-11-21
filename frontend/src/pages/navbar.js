@@ -38,9 +38,9 @@ const handleLoginClick = () => {
                     {Object.keys(user).length !== 0 ? (
                     <div>
                         {/*if logged in*/}
-                        <button className="logout-button" onClick={handleLogout}>Logout</button>
+                        <button className="logout-button-nav" onClick={handleLogout}>Logout</button>
                         
-                        <button className='ViewProfile-user-btn' onClick={handleViewProfileClick}>hey {user.name}</button>
+                        <button className='ViewProfile-user-btn-nav' onClick={handleViewProfileClick}>hey {user.name}</button>
                         
                     </div>
                     ) : (

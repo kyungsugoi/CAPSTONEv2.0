@@ -520,4 +520,30 @@
   margin-top: -30px;
 }
 
+.logout-button-nav {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Adjust the font size as needed */
+}
+
+
+.ViewProfile-user-btn-nav{
+  padding: 10px 20px;
+  margin-left: 10px; /* Add margin to separate it from the Sign-In button */
+  background-color :black; /* Customize the Login button's style */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Adjust the font size as needed */
+
+
+
+}
+
 
