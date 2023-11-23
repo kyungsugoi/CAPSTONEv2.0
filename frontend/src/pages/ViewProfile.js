@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import '../App.css';
 import { useUser } from '../UserContext'; // Import the useUser hook
+import Navbar from './navbar';
 
 function ViewProfile() {
   const { user } = useUser(); // Access user data from the context
@@ -13,7 +14,7 @@ function ViewProfile() {
 
   return (
     <div className='App'>
-      <h1>View Profile</h1>
+      <Navbar/>
       <div className='greeting-text'> Hey,{user.name}</div>
       <div className='box-view'>
         <div className='tabs'>

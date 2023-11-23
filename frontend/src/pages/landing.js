@@ -35,12 +35,14 @@ function LandingPage() {
                 <div className='top-right-container'>
                     {Object.keys(user).length !== 0 ? (
                     <div>
+                        {/*if logged in*/}
                         <button className="logout-button" onClick={handleLogout}>Logout</button>
                         
                         <button className='ViewProfile-user-btn' onClick={handleViewProfileClick}>hey {user.name}</button>
                         
                     </div>
                     ) : (
+                        
                     <button className="login-button" onClick={handleLoginClick}>Login</button>
                     )}
                     
@@ -55,11 +57,12 @@ function LandingPage() {
             <div className="centered-text">
                 
                 <div className='top-text'>
-                <p> Enter your course to get started</p>
+                <p> Enter your class to get started</p>
                 </div>
                 <div className='search-bar-container'>
                 <SearchResults/>
                 </div>
+                
 				{/*<div className="Course-Placeholder">
 					<button className="course-button" onClick={() => navigate('/search')}>
 						View All Courses
