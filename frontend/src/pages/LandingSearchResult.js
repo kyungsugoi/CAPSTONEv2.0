@@ -7,7 +7,7 @@ import '../App.css';
 
 
 
-function SearchResults() {
+function LandingSearchResults() {
 
     const url = "http://127.0.0.1:8000/api/courses/";
     const [data, setData] = useState([]);
@@ -38,10 +38,9 @@ function SearchResults() {
     }
     const navigate = useNavigate();
 
-
-	return (
-        <div className='Search_results'>
-			<header className="black-bar" > 
+    return(
+    <div className='Search_results'>
+		<header className="black-bar" > 
 				<div className='Connection-container'>
                     <img src='/facebook.png' alt=''></img>
                     <img src='/instagram.png' alt='' ></img>
@@ -56,7 +55,7 @@ function SearchResults() {
 				</div>
 					
 			</header>
-        
+        <SearchBar />
         <div className='search-bar-container'>
         <input
         type="search"
@@ -96,6 +95,7 @@ function SearchResults() {
             </div>
     </div>
     );
+
 }
 
-export default SearchResults;
+export default LandingSearchResults;
