@@ -2,7 +2,6 @@
 .black-bar {
   position: relative; /* Ensure positioning context */
   background: linear-gradient(to bottom,white, white);
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   height: 100px;
   width: 100%;
 }
@@ -212,9 +211,10 @@
   background-color: #d0caca; /* Grey background color */
   padding: 10px;
   margin: 10px auto; /* Center-align the rectangles */
-  width: 70%; /* Adjust the width as needed */
+  width: 90%; /* Adjust the width as needed */
   margin-top: 50px;
-
+  border-radius: 10px;
+  justify-content: center;
 }
 
 .course-information-container {
@@ -224,13 +224,25 @@
 	width: 90%; /* Adjust the width as needed */
 	margin-top: 50px;
 	display: flex;
-	height: 200px;
+	height: 300px;
+	border-radius: 10px;
+}
+
+.search-course-information-container {
+	background-color: #d0caca; /* Grey background color */
+	padding: 10px;
+	margin: 10px auto; /* Center-align the rectangles */
+	width: 90%; /* Adjust the width as needed */
+	margin-top: 50px;
+	display: flex;
+	height: 300px;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 .description-left-section,
 .description-right-section {
   flex: 2;
-  display: block;
   justify-content: center;
   align-items: center;
   border: 1px solid #000;
@@ -279,17 +291,18 @@
 	background-color: #d0caca; /* Grey background color */
 	padding: 10px;
 	margin: 10px auto; /* Center-align the rectangles */
-	width: 90%; /* Adjust the width as needed */
+	width: 900px; /* Adjust the width as needed */
 	margin-top: 50px;
 	display: flex;
-	height: 200px;
+	height: 300px;
+	border-radius: 10px;
+	justify-content: center;
   }
 
 .review-left-section,
 .review-middle-section,
 .review-right-section {
   flex: 1;
-  display: block;
   justify-content: center;
   align-items: center;
   border: 1px solid #000;
@@ -315,6 +328,7 @@
 	margin: 10px;
 	display: flex;
 	justify-content: center;
+	border-radius: 10px;
 }
 
 .workload-tag {
@@ -324,15 +338,18 @@
 	margin: 10px;
 	display: flex;
 	justify-content: center;
+	border-radius: 10px;
 }
 
 .misc-tag {
 	background-color: #829ac2;
-	width: 60px;
-	height: flex;
+	width: 120px;
+	height: 30px;
 	margin: 10px;
 	display: inline-flex;
+	display: inline-flex;
 	justify-content: center;
+	border-radius: 10px;
 }
 
 .loginPage-container {
@@ -340,25 +357,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
-.background-image-login {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('login_background.jpg'); /* Specify the URL of your background image */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.5; /* Adjust the opacity if needed */
-}
 
 .login-content {
-  z-index: 1; /* Place the content above the background image */
-  /* Add styles for your login content here */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -374,6 +376,8 @@
   justify-content: center;
 }
 
+/* defult popup box stuff*/
+
 .popup-box{
   position: fixed;
   top: 0;
@@ -386,29 +390,35 @@
   align-items: center;
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(105%); 
+  }
+  to {
+    transform: translateY(0); 
+  }
+}
+
 .box{
+  animation: slideUp 0.3s ease-in-out; /* Adjust the duration (0.5s) as needed */
   background: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   position: relative; /* Add this line */
-  width: 800px; /* Set the desired width */
-  height: 500px; 
+  width: 500px; /* Set the desired width */
+  height: 600px; 
 }
 
-.btn-close{
+.btn-close {
   position: absolute;
-  top: -5px;
-  right: -10px;
-  background: red;
-  border: 1px solid black;
-  border-radius: 50%;
-  font-size: 15px;
+  top: 2px;
+  right: 10px;
+  font-size: 13px;
+  font-weight: bold; /* Use font-weight to make text bold */
   cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  color: black; /* Change the font color to red (#ff0000) */
+  color: black; /* Change the font color to black */
 }
 
 
@@ -419,6 +429,64 @@
   margin-top: 60px;
 }
 
+/*login popup box stuff*/
+.popup-box-login{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(105%); 
+  }
+  to {
+    transform: translateY(0); 
+  }
+}
+
+.box-login{
+  animation: slideUp 0.3s ease-in-out; /* Adjust the duration (0.5s) as needed */
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative; /* Add this line */
+  width: 500px; /* Set the desired width */
+  height: 600px; 
+}
+
+.btn-close-login{
+  position: absolute;
+  background-color: white;
+  border-color: white;
+  border: 0px;
+  top: 2px;
+  right: 10px;
+  font-size: 15px;
+  font-weight: bold; /* Use font-weight to make text bold */
+  cursor: pointer;
+  color: black; /* Change the font color to black */
+}
+
+
+.box-login-view{
+  border: 2px solid white;
+  width: 500px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+
+
+/*Tab menu for view-profile*/
 .tabs{
   display: flex;
   justify-content: space-between;
@@ -541,9 +609,46 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px; /* Adjust the font size as needed */
-
-
-
 }
+
+.add-review-btn {
+	border-radius: 10px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.book-stack1 {
+  position: absolute;
+  left: 135px; /* Adjust the left position as needed */
+  bottom: -75px; /* Adjust the top position as needed */
+  width: 80%; /* Adjust the width as needed */
+  height: 80%; /* Maintain aspect ratio */
+}
+
+.fox-gif {
+  width: 250px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+.grass {
+  position: absolute;
+  bottom: -110px;
+  left: 10px;
+  width: 115%; /* Full width of the container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.book-stack2 {
+  position: absolute;
+  left: -35px; /* Adjust the left position as needed */
+  bottom: -25px; /* Adjust the top position as needed */
+  width: 50%; /* Adjust the width as needed */
+  height:50%; /* Maintain aspect ratio */
+}
+
 
 
