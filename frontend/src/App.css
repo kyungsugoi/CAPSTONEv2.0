@@ -610,6 +610,7 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px; /* Adjust the font size as needed */
+}
 
 .add-review-btn {
 	border-radius: 10px;
