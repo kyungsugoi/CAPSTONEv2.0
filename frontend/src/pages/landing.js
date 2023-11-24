@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css'; 
 import { useNavigate } from 'react-router-dom';
-import SearchResults from './SearchResult';
+import SearchResults from './LandingSearchResult';
 import { useUser } from '../UserContext'; // Import the useUser hook
 import SearchBar from './Search-bar';
 import LoginPopup from './Login_popup';

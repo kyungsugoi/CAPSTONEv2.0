@@ -226,7 +226,6 @@
 	display: flex;
 	height: 300px;
 	border-radius: 10px;
-	cursor: pointer;
 }
 
 .search-course-information-container {
@@ -238,7 +237,7 @@
 	display: flex;
 	height: 300px;
 	border-radius: 10px;
-	cursor: grab;
+	cursor: pointer;
 }
 
 .description-left-section,

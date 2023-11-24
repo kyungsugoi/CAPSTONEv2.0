@@ -255,7 +255,7 @@ function Courses() {
 
 
 			<div className="bottom-black-bar">
-                <p>Footer content here</p>
+                <p>@Edmonton,Alberta,Canada Macewan University 2023</p>
             </div>
 		</div>			
     );
