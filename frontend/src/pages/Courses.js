@@ -97,15 +97,18 @@ function Courses() {
 	return( 
 		<div className='courses-container'> 
 			<header className="black-bar" > 
-					<div className='top-right-container'>
-					<button className="sign-in-button" onClick={() => navigate('/SignIn')}>
-					Sign-In
-					</button>
-					<button className="login-button" onClick={() => navigate('/Login')}>
-					Login
-					</button>
+				<div className='Connection-container'>
+                    <img src='/facebook.png' alt=''></img>
+                    <img src='/instagram.png' alt='' ></img>
+                    <img src='/twitter.png' alt='' ></img>
+                </div>
 
-					</div>
+				<div className='top-right-container'>
+				<button className="login-button" onClick={() => navigate('/Login')}>
+				Login
+				</button>
+
+				</div>
 					
 			</header>
 
@@ -123,38 +126,8 @@ function Courses() {
 				</div>
 			</div>
 
-
-
-			{reviews.map((item) => {
-              return(
-                <tr>
-				  <div className='course-reviews-container'>
-				<div className="review-left-section">
-					<p>Username</p>
-					<p>Professor: {item.professor}</p>
-					<p>Grade received: {item.grade}</p>
-				</div>
-     			<div className="review-middle-section">
-					<p>{item.comment}</p>
-				</div>
-      			<div className="review-right-section">
-					<div className="difficulty-tag">Difficulty: {item.difficulty}/5</div>
-					<div className="workload-tag">workload: {item.workload}/5</div>
-					<div className="misc-tag">Group Work</div>
-					<div className="misc-tag">Weekly quizzes</div>
-					<div className="misc-tag">Weekly quizzes</div>
-				</div>
-			</div> 
-                </tr>
-              );
-            })}
-			
-
-
-
-
 			<div className="popup-review" >
-<button className="add-review-btn" onClick={togglePopup}>Add a review
+			<button className="add-review-btn" onClick={togglePopup}>Add a review
 
 			</button>
 				{isOpen && <Popup
@@ -248,6 +221,38 @@ function Courses() {
     />}
 
 </div>
+
+
+
+			{reviews.map((item) => {
+              return(
+                <tr>
+				  <div className='course-reviews-container'>
+				<div className="review-left-section">
+					<p>Username</p>
+					<p>Professor: {item.professor}</p>
+					<p>Grade received: {item.grade}</p>
+				</div>
+     			<div className="review-middle-section">
+					<p>{item.comment}</p>
+				</div>
+      			<div className="review-right-section">
+					<div className="difficulty-tag">Difficulty: {item.difficulty}/5</div>
+					<div className="workload-tag">workload: {item.workload}/5</div>
+					<div className="misc-tag">Group Work</div>
+					<div className="misc-tag">Weekly quizzes</div>
+					<div className="misc-tag">Weekly quizzes</div>
+				</div>
+			</div> 
+                </tr>
+              );
+            })}
+			
+
+
+
+
+
 
 			<div className="bottom-black-bar">
                 <p>Footer content here</p>
