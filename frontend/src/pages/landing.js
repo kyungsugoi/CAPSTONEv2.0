@@ -1,16 +1,25 @@
-
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css'; 
 import { useNavigate } from 'react-router-dom';
 import SearchResults from './SearchResult';
 import { useUser } from '../UserContext'; // Import the useUser hook
 import SearchBar from './Search-bar';
+import LoginPopup from './Login_popup';
+import Login from './login';
+
 
 function LandingPage() {
 
     const { user, handleLogout } = useUser(); // Access handleLogout from the context
     
     const navigate = useNavigate();
+
+    
+    const[isOpen, setIsOpen] = useState(false);
+    
+    const togglePopup =() =>{
+		setIsOpen(!isOpen);
+	}
     
     const handleLoginClick = () => {
         navigate('/Login'); // Navigate to the sign-in page
@@ -23,31 +32,58 @@ function LandingPage() {
 
     return (
         
-        <div className="landing-page">
-            <header className="black-bar" >
-                <div className='Connection-container'>
-                    <img src='/facebook.png' alt=''></img>
-                    <img src='/instagram.png' alt='' ></img>
-                    <img src='/twitter.png' alt='' ></img>
-                </div>
+<div className="landing-page">
+  <header className="black-bar">
+    <div className="Connection-container">
+      <img src="/facebook.png" alt=""></img>
+      <img src="/instagram.png" alt=""></img>
+      <img src="/twitter.png" alt=""></img>
+    </div>
 
+<div className="top-right-container">
+  {Object.keys(user).length !== 0 ? (
+    <div>
+      {/* if logged in */}
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
 
-                <div className='top-right-container'>
-                    {Object.keys(user).length !== 0 ? (
-                    <div>
-                        {/*if logged in*/}
-                        <button className="logout-button" onClick={handleLogout}>Logout</button>
-                        
-                        <button className='ViewProfile-user-btn' onClick={handleViewProfileClick}>hey {user.name}</button>
-                        
-                    </div>
-                    ) : (
-                        
-                    <button className="login-button" onClick={handleLoginClick}>Login</button>
-                    )}
-                    
-                    </div>
-            </header>
+      <button
+        className="ViewProfile-user-btn"
+        onClick={handleViewProfileClick}
+      >
+        Hey {user.name}
+      </button>
+    </div>
+  ) : (
+    <div className="Login-popup">
+      <button
+        className="Log-in-button"
+        onClick={() => {
+          // Check if the button clicked is the login button
+          if (!isOpen) {
+            togglePopup();
+          }
+        }}
+      >
+        Login
+      </button>
+
+      {isOpen && (
+        <LoginPopup
+          handleClose={togglePopup}
+          content={
+            <div>
+              <Login/>
+            </div>
+          }
+        />
+      )}
+    </div>
+  )}
+</div>
+  </header>
+
 
 
 
