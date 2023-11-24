@@ -114,9 +114,11 @@ function Courses() {
 				<h1 className="course-description-header">{code} - {name}</h1>
                         <p>{description}</p>
 				</div>
+				
 				<div className="description-right-section">
-				<div className="difficulty-tag">Difficulty: 3/5</div>
-					<div className="workload-tag">workload: 3/5</div>
+					<div className="total-tag">Total: { }</div>
+					<div className="difficulty-tag">Difficulty: {   }  / 5</div>
+					<div className="workload-tag">workload: {  } / 5</div>
 					<div className="misc-tag">Group Work</div>
 					<div className="misc-tag">Weekly quizzes</div>
 					<div className="misc-tag">Weekly quizzes</div>
