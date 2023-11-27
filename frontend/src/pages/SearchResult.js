@@ -41,7 +41,7 @@ function SearchResults() {
 
 	return (
         <div className='Search_results'>
-			<header className="black-bar" > 
+					<header className="black-bar" > 
 				<div className='Connection-container'>
                     <img src='/facebook.png' alt=''></img>
                     <img src='/instagram.png' alt='' ></img>
@@ -56,45 +56,57 @@ function SearchResults() {
 				</div>
 					
 			</header>
-        
-        <div className='search-bar-container'>
-        <input
-        type="search"
-        placeholder="Search for courses..."
-        value = {searchInput}
-        onChange={(e) => searchItems(e.target.value)}
-        className="search-input"/>
-        
-        </div>
+            <div className='search-bar-container'>
+                <input
+                    type="search"
+                    placeholder="Search for courses..."
+                    value={searchInput}
+                    onChange={(e) => searchItems(e.target.value)}
+                    className="search-input"
+                />
+            </div>
 
-        {searchInput.length > 1 ? (
-                    filteredResults.slice(0,3).map((item) => {
-                        
-                        return (
-                            <table width = "500px" align = "center">
-
-                            <tr>
-                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
-                            </tr>
-                            </table>
-                        );
-                    }
-                ) ): (
-                    data.slice(0,3).map((item) => {
-                        return (
-                            <table width = "500px" align = "center">
-                            <tr>
-                                <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
-                            </tr>
-                            </table>
-                            );
-                }
+            {searchInput.length > 1 ? (
+                filteredResults.slice(0, 3).map((item) => (
+                    <div
+                        className="search-course-information-container"
+                        key={item.cid}
+                        onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course } })}
+                    >
+                        <div className="description-left-section">
+                            <h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
+                            <p>{item.cdesc}</p>
+                        </div>
+                        <div className="description-right-section">
+                            <div className="difficulty-tag">Difficulty: {item.difficulty}/5</div>
+                            <div className="workload-tag">Workload: {item.workload}/5</div>
+                            {/* Add additional tags as needed */}
+                        </div>
+                    </div>
                 ))
-                }
-				<div className="bottom-black-bar">
+            ) : (
+                data.slice(0, 3).map((item) => (
+                    <div
+                        className="search-course-information-container"
+                        key={item.cid}
+                        onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course } })}
+                    >
+                        <div className="description-left-section">
+                            <h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
+                            <p>{item.cdesc}</p>
+                        </div>
+                        <div className="description-right-section">
+                            <div className="difficulty-tag">Difficulty: {item.difficulty}/5</div>
+                            <div className="workload-tag">Workload: {item.workload}/5</div>
+                            {/* Add additional tags as needed */}
+                        </div>
+                    </div>
+                ))
+            )}
+			<div className="bottom-black-bar">
                 <p>@Edmonton,Alberta,Canada Macewan University 2023</p>
             </div>
-    </div>
+        </div>
     );
 }
 

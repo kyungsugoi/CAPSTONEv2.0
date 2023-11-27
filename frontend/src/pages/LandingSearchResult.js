@@ -40,21 +40,6 @@ function LandingSearchResults() {
 
     return(
     <div className='Search_results'>
-		<header className="black-bar" > 
-				<div className='Connection-container'>
-                    <img src='/facebook.png' alt=''></img>
-                    <img src='/instagram.png' alt='' ></img>
-                    <img src='/twitter.png' alt='' ></img>
-                </div>
-
-				<div className='top-right-container'>
-				<button className="login-button" onClick={() => navigate('/Login')}>
-				Login
-				</button>
-
-				</div>
-					
-			</header>
         <SearchBar />
         <div className='search-bar-container'>
         <input
@@ -90,9 +75,6 @@ function LandingSearchResults() {
                 }
                 ))
                 }
-				<div className="bottom-black-bar">
-                <p>@Edmonton,Alberta,Canada Macewan University 2023</p>
-            </div>
     </div>
     );
 
