@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './Search-bar';
 import '../App.css'; 
+import Navbar from './navbar';
 
 
 
@@ -43,21 +44,7 @@ function SearchResults() {
 
 	return (
         <div className='Search_results'>
-					<header className="black-bar" > 
-				<div className='Connection-container'>
-                    <img src='/facebook.png' alt=''></img>
-                    <img src='/instagram.png' alt='' ></img>
-                    <img src='/twitter.png' alt='' ></img>
-                </div>
-
-				<div className='top-right-container'>
-				<button className="login-button" onClick={() => navigate('/Login')}>
-				Login
-				</button>
-
-				</div>
-					
-			</header>
+			<Navbar/>
             <div className='search-bar-container'>
                 <input
                     type="search"
