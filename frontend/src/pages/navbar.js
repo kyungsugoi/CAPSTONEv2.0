@@ -1,4 +1,4 @@
-// Navbar.js
+// Navbar.js this is a componet
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
@@ -30,10 +30,10 @@ const handleLoginClick = () => {
       <div className='logo-navbar' onClick={handleLogoClick}>
       <img src='/Course_rev_logo_nav.png' alt='' className='logo-navbar'></img>
       </div>
-
+{/* 
       <div className='search-bar-navbar'>
         <SearchResults />
-      </div>
+      </div> */}
       <div className='top-right-container'>
                     {Object.keys(user).length !== 0 ? (
                     <div>
