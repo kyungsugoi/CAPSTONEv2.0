@@ -10,33 +10,43 @@ import { useUser } from '../UserContext'; // Import the useUser hook to acsses t
 
 function Courses() {
 
+    const url = "http://127.0.0.1:8000/api/courses";
+
 	const navigate = useNavigate();
 	const {state} = useLocation();
     const {id, code, name, description, reviews} = state;
 	let course_id = parseInt(id);
 	const[isOpen, setIsOpen] = useState(false);
 
+	
+	const workloadsum = reviews.map(datum => datum.workload).reduce((a, b) => a + b, 0)
+	const difficultysum = reviews.map(datum => datum.difficulty).reduce((a, b) => a + b, 0)
+	const reviewsum = reviews.length
+
 	const togglePopup =() =>{
 		setIsOpen(!isOpen);
 	}
 	
+	// const refreshList = () => {
+	// 	axios
+	// 	  .get(`/api/courses/${course_id}`)
+	// 	  .then((res) => this.setState({ reviews: res.course}))
+	// 	  .catch((err) => console.log(err));
+	//   };
 
 	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
 
 
-	useEffect(() => {
-		axios
-		
-		  .get("http://127.0.0.1:8000/api/tags/") // Update the API endpoint to match your dataset
-		  .then((res) => {
-			// get all tag names that ar enot difficulty and workload
-			const tagNamesList = res.data.slice(10).map((item) => ({
-			  label: item.tagname,
-			}));
-			setTagNames(tagNamesList);
-		  })
-		  .catch((err) => console.log(err));
-	  }, []);
+	useEffect(()=>{
+		const axiosTest=async()=> {
+			let response = await axios.get("http://127.0.0.1:8000/api/tags/")
+			console.log(response.data)
+			setTagNames(response.data)
+		}
+		 axiosTest();
+		})
+
+	
 
 	const [reviewData, setReviewData] = useState({
 		course_id: course_id,
@@ -74,7 +84,10 @@ function Courses() {
 			difficulty: Difficulty,
 			workload: Workload,
 		})
-		.then((res) => navigate('/Course', { state: { id, code, name, description, reviews} }))
+		// .then((res) => navigate('/Course', { state: { id, code, name, description, reviews} }))
+		.then((res) => navigate('/'))
+		// .then((res) => refreshList())
+
 		.catch(function(error) {
 			console.log(error);
 		});
@@ -110,9 +123,9 @@ function Courses() {
 				</div>
 				
 				<div className="description-right-section">
-					<div className="total-tag">Total: { }</div>
-					<div className="difficulty-tag">Difficulty: {   }  / 5</div>
-					<div className="workload-tag">workload: {  } / 5</div>
+					<div className="total-tag">Total Reviews: {reviewsum}</div>
+					<div className="difficulty-tag">Difficulty: {Number(difficultysum/reviewsum).toFixed(1) || 0}/5</div>
+					<div className="workload-tag">workload: {Number(workloadsum/reviewsum).toFixed(1) || 0}/5</div>
 					<div className="misc-tag">Group Work</div>
 					<div className="misc-tag">Weekly quizzes</div>
 					<div className="misc-tag">Weekly quizzes</div>

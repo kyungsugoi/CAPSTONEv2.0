@@ -58,7 +58,7 @@ function LandingSearchResults() {
                             <table width = "500px" align = "center">
 
                             <tr>
-                                 <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
+                                 <td><button className='search-button' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                         );
@@ -68,7 +68,7 @@ function LandingSearchResults() {
                         return (
                             <table width = "500px" align = "center">
                             <tr>
-                                <td><button backgroundColor='#CC0000' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
+                                <td><button className='search-button' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                             );
