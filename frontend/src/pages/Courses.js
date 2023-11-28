@@ -5,6 +5,8 @@ import Popup from './popup';
 import CustomSelect from './CustomSelect';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from './navbar';
+import { useUser } from '../UserContext'; // Import the useUser hook to acsses the user data 
 
 function Courses() {
 
@@ -60,18 +62,6 @@ function Courses() {
 
 	const handleAddReview = () => {
 
-	// Access the review data
-	
-
-	//  You can handle the review submission here
-	//  For now, just log the review data
-	// console.log('Term', Term);
-	// console.log('Year', Year);
-	// console.log('Professor', Professor);
-	// console.log('Grade', Grade);
-	// console.log('ReviewText', Comment);
-	// console.log('Difficulty', Difficulty);
-	// console.log('Workload', Workload);
 
 	axios
 		.post("http://127.0.0.1:8000/api/reviews/", {
@@ -96,7 +86,8 @@ function Courses() {
     // const {id, code, name, description} = state;
 	return( 
 		<div className='courses-container'> 
-			<header className="black-bar" > 
+		<Navbar/>
+			{/* <header className="black-bar" > 
 				<div className='Connection-container'>
                     <img src='/facebook.png' alt=''></img>
                     <img src='/instagram.png' alt='' ></img>
@@ -110,7 +101,7 @@ function Courses() {
 
 				</div>
 					
-			</header>
+			</header> */}
 
 			<div className="course-information-container">
 				<div className="description-left-section">
