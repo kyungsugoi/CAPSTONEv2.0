@@ -7,6 +7,12 @@ class Course(models.Model):
     cname = models.CharField(max_length=50)
     cdesc = models.TextField()
     
+
+class Tag(models.Model):
+    tagid = models.AutoField(primary_key = True)
+    tagname = models.CharField(max_length = 30)
+    value = models.IntegerField(default = 0)
+    
 class Student(models.Model):
     id = models.AutoField(primary_key = True)
     name = models.CharField(max_length = 100)
@@ -22,9 +28,4 @@ class Review(models.Model):
     comment = models.TextField()
     difficulty = models.IntegerField(default=0)
     workload = models.IntegerField(default=0)
-    
-class Tag(models.Model):
-    tagid = models.AutoField(primary_key = True)
-    tagname = models.CharField(max_length = 30)
-    value = models.IntegerField()
-    
+    tags = models.ManyToManyField(Tag, related_name='reviews', blank=True)
