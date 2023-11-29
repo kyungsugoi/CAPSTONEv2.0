@@ -36,14 +36,22 @@ function Courses() {
 	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
 
 
-	useEffect(()=>{
-		const axiosTest=async()=> {
-			let response = await axios.get("http://127.0.0.1:8000/api/tags/")
-			console.log(response.data)
-			setTagNames(response.data)
-		}
-		 axiosTest();
-		})
+useEffect(() => {
+  const axiosTest = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/tags/");
+      const formattedTagNames = response.data.map(tag => ({
+        value: tag.tagid, // or use another unique identifier from your data
+        label: tag.tagname // or use another property that represents the tag name
+      }));
+      setTagNames(formattedTagNames);
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    }
+  };
+
+  axiosTest();
+}, []);
 
 	
 
