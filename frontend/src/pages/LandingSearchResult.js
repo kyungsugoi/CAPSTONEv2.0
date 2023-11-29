@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './Search-bar';
 import '../App.css'; 
+import Navbar from './navbar';
 
 
 

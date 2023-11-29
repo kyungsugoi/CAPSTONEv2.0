@@ -35,6 +35,13 @@ function Courses() {
 
 	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
 
+	const { user } = useUser(); // Access user data from the context
+	const [userName, setUserName] = useState(user.name); // State variable to store user name
+
+	useEffect(() => {
+		// Update userName when user.name changes
+		setUserName(user.name);
+	  }, [user.name]); // The effect will re-run when user.name changes
 
 useEffect(() => {
   const axiosTest = async () => {
@@ -107,21 +114,7 @@ useEffect(() => {
 	return( 
 		<div className='courses-container'> 
 		<Navbar/>
-			{/* <header className="black-bar" > 
-				<div className='Connection-container'>
-                    <img src='/facebook.png' alt=''></img>
-                    <img src='/instagram.png' alt='' ></img>
-                    <img src='/twitter.png' alt='' ></img>
-                </div>
-
-				<div className='top-right-container'>
-				<button className="login-button" onClick={() => navigate('/Login')}>
-				Login
-				</button>
-
-				</div>
-					
-			</header> */}
+	
 
 			<div className="course-information-container">
 				<div className="description-left-section">
@@ -241,7 +234,7 @@ useEffect(() => {
               return(
 				  <div className='course-reviews-container'>
 				<div className="review-left-section">
-					<p>Username</p>
+					<p>Username: {userName}</p>
 					<p>Professor: {item.professor}</p>
 					<p>Grade received: {item.grade}</p>
 				</div>

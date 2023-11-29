@@ -30,6 +30,7 @@ function Login(){
     function handleSignOut(event) {
         setUser({});
         document.getElementById("signInDiv").hidden = false;
+        navigate('/');
 
     }
 
