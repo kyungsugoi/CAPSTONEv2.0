@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from 'react';
 import '../App.css';
 import Popup from './popup';
@@ -232,7 +231,6 @@ function Courses() {
 
 			{reviews.map((item) => {
               return(
-                <tr>
 				  <div className='course-reviews-container'>
 				<div className="review-left-section">
 					<p>Username</p>
@@ -250,7 +248,6 @@ function Courses() {
 					<div className="misc-tag">Weekly quizzes</div>
 				</div>
 			</div> 
-                </tr>
               );
             })}
 			
