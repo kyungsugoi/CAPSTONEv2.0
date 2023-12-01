@@ -2,9 +2,10 @@ from rest_framework import serializers
 from .models import Review, Student, Course
 
 class ReviewSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Review
-        fields = ('rid', 'course_id', 'term', 'year','professor', 'grade', 'comment', 'difficulty', 'workload')
+        fields = ('rid', 'course_id', 'username', 'term', 'year','professor', 'grade', 'comment', 'difficulty', 'workload', 'tags')
     
     def to_representation(self, instance):
         self.fields['course_id'] = CourseRepresentationSerializer(read_only=True)
@@ -14,6 +15,9 @@ class CourseRepresentationSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Course
         fields = ('ccode', 'cname')
+        
+        
+        
 from .models import Student, Course, Tag
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -28,6 +32,9 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'email')
         
 class TagSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True, read_only=True)
     class Meta:
         model = Tag
-        fields = ('tagid', 'tagname', 'value')
+        fields = ('tagid', 'tagname', 'value', 'reviews')
+        
+        

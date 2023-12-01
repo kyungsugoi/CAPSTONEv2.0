@@ -21,6 +21,7 @@ class Student(models.Model):
 class Review(models.Model):
     rid = models.AutoField(primary_key=True)
     course_id = models.ForeignKey('Course', related_name='course', on_delete=models.CASCADE, db_column='course_id')
+    username = models.CharField(max_length =50, default = 'Anonymous')
     term = models.CharField(max_length=20)
     year = models.IntegerField()
     professor = models.CharField(max_length = 10, default='unknown')

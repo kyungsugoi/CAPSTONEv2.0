@@ -17,7 +17,7 @@ function LandingSearchResults() {
 
     const fetchInfo = async() => {
         return axios
-        .get(`${url}?search=${searchInput}`)
+        .get(`${url}?ccode=${searchInput}`)
         .then((res) => setData(res.data));
     };
 
@@ -39,6 +39,12 @@ function LandingSearchResults() {
     }
     const navigate = useNavigate();
 
+    const handleEnterSearch = (event) => {
+        if (event.key === 'Enter') 
+            navigate(`/search`, {state:{search:event.target.value}})
+        }
+    
+
     return(
     <div className='Search_results'>
         <SearchBar />
@@ -48,6 +54,7 @@ function LandingSearchResults() {
         placeholder="Search for courses..."
         value = {searchInput}
         onChange={(e) => searchItems(e.target.value)}
+        onKeyDown={handleEnterSearch}
         className="search-input"/>
         
         </div>
@@ -59,17 +66,17 @@ function LandingSearchResults() {
                             <table width = "500px" align = "center">
 
                             <tr>
-                                 <td><button className='search-button' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
+                                 <td><button className='search-button' onClick={() => navigate(`/Course/${item.cid}`)}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                         );
                     }
                 ) ): (
-                    data.slice(0,3).map((item) => {
+                    data.slice(0,0).map((item) => {
                         return (
                             <table width = "500px" align = "center">
                             <tr>
-                                <td><button className='search-button' onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course} })}>{item.ccode} {item.cname} </button></td>
+                                <td><button className='search-button' onClick={() => navigate(`/Course/${item.cid}`)}>{item.ccode} {item.cname} </button></td>
                             </tr>
                             </table>
                             );

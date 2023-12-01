@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SearchBar from './Search-bar';
 import '../App.css'; 
 import Navbar from './navbar';
@@ -12,15 +12,24 @@ import Navbar from './navbar';
 
 function SearchResults() {
 
+    const {state} = useLocation();
+    const {search} = state;
     const url = "http://127.0.0.1:8000/api/courses/";
     const [data, setData] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
     const fetchInfo = async() => {
-        return axios
-        .get(`${url}?search=${searchInput}`)
-        .then((res) => setData(res.data));
+        if (searchInput === "") {
+            return axios
+            .get(`${url}?ccode=${search}`)
+            .then((res) => setData(res.data));
+        }
+        else {
+            return axios
+            .get(`${url}?ccode=${searchInput}`)
+            .then((res) => setData(res.data));
+        }
     };
 
     useEffect( () => {
@@ -56,11 +65,11 @@ function SearchResults() {
             </div>
 
             {searchInput.length > 1 ? (
-                filteredResults.slice(0, 3).map((item) => (
+                filteredResults.slice(0, 5).map((item) => (
                     <div
                         className="search-course-information-container"
                         key={item.cid}
-                        onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course } })}
+                        onClick={() => navigate(`/Course/${item.cid}`)}
                     >
                         <div className="description-left-section">
                             <h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
@@ -74,11 +83,11 @@ function SearchResults() {
                     </div>
                 ))
             ) : (
-                data.slice(0, 3).map((item) => (
+                data.map((item) => (
                     <div
                         className="search-course-information-container"
                         key={item.cid}
-                        onClick={() => navigate('/Course', { state: { id: item.cid, code: item.ccode, name: item.cname, description: item.cdesc, reviews: item.course } })}
+                        onClick={() => navigate(`/Course/${item.cid}`)}
                     >
                         <div className="description-left-section">
                             <h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
