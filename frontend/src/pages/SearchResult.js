@@ -21,7 +21,7 @@ function SearchResults() {
 
     const fetchInfo = async() => {
         if (searchInput === "") {
-            return axios
+            await axios
             .get(`${url}?ccode=${search}`)
             .then((res) => setData(res.data));
         }
@@ -35,7 +35,12 @@ function SearchResults() {
     useEffect( () => {
     fetchInfo();
     } );
+
+    // const workloadsum = reviews.map(datum => datum.workload).reduce((a, b) => a + b, 0)
+	// const difficultysum = reviews.map(datum => datum.difficulty).reduce((a, b) => a + b, 0)
+	// const reviewsum = reviews.length
     
+
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
         if (searchInput !== '') {
@@ -52,12 +57,12 @@ function SearchResults() {
 
 
 	return (
-        <div className='Search_results'>
+        <div className='search-results'>
 			<Navbar/>
             <div className='search-bar-container'>
                 <input
                     type="search"
-                    placeholder="Search for courses..."
+                    placeholder="Search for course..."
                     value={searchInput}
                     onChange={(e) => searchItems(e.target.value)}
                     className="search-input"
@@ -76,8 +81,9 @@ function SearchResults() {
                             <p>{item.cdesc}</p>
                         </div>
                         <div className="description-right-section">
-                            <div className="difficulty-tag">Difficulty: {item.difficulty}/5</div>
-                            <div className="workload-tag">Workload: {item.workload}/5</div>
+                            <div className="difficulty-tag">Difficulty: {item.course.map(datum => datum.difficulty).reduce((a, b) => a + b, 0)/item.course.length || 0}/5</div>
+                            <div className="workload-tag">Workload: {item.course.map(datum => datum.workload).reduce((a, b) => a + b, 0)/item.course.length || 0}/5</div>
+                            <div className="workload-tag">Total Reviews: {item.course.length || 0}</div>
                             {/* Add additional tags as needed */}
                         </div>
                     </div>
@@ -94,7 +100,7 @@ function SearchResults() {
                             <p>{item.cdesc}</p>
                         </div>
                         <div className="description-right-section">
-                            <div className="difficulty-tag">Difficulty: {item.difficulty}/5</div>
+                            <div className="difficulty-tag">Difficulty: ({item.course.map(datum => datum.workload).reduce((a, b) => a + b, 0)/item.course.length})/5</div>
                             <div className="workload-tag">Workload: {item.workload}/5</div>
                             {/* Add additional tags as needed */}
                         </div>

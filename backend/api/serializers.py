@@ -5,7 +5,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Review
-        fields = ('rid', 'course_id', 'username', 'term', 'year','professor', 'grade', 'comment', 'difficulty', 'workload', 'tags')
+        fields = ('rid', 'course_id', 'username', 'date', 'term', 'year','professor', 'grade', 'comment', 'difficulty', 'workload', 'tags')
     
     def to_representation(self, instance):
         self.fields['course_id'] = CourseRepresentationSerializer(read_only=True)

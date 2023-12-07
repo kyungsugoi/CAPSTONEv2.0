@@ -25,6 +25,12 @@ const Course = () => {
 
 	const[isOpen, setIsOpen] = useState(false);
 
+	// {Object.keys(user).length !== 0 ? (
+	// 	userName = user.username
+	// 	) : (
+	// 		userName
+	// 	)}
+
 
 	const workloadsum = courses.course?.map(datum => datum.workload).reduce((a, b) => a + b, 0)
 	const difficultysum = courses.course?.map(datum => datum.difficulty).reduce((a, b) => a + b, 0)
@@ -67,10 +73,13 @@ const Course = () => {
 	axiosTest();
 	}, []);
 
-  const [tags, setTags] = useState();
+	const localeDate = (new Date()).toLocaleDateString();
+  	const [tags, setTags] = useState();	
 
 	const [reviewData, setReviewData] = useState({
 		course_id: params.id,
+		Username: userName,
+		// ReviewDate: localeDate,
 		Term: "",
 		Year: "",
 		Professor: "",
@@ -87,7 +96,7 @@ const Course = () => {
 	};
 
 	const handleTags = (e) => {
-		const {value, label} = e.target;
+		// const {value, label} = e.target;
 
 		setTags(Array.isArray(e) ? e.map(x => x.value) : {});
 	};
@@ -103,6 +112,8 @@ const Course = () => {
 	axios
 		.post("http://127.0.0.1:8000/api/reviews/", {
 			course_id: params.id,
+			username: userName,
+			// date: localeDate,
 			term: Term,
 			year: Year,
 			professor: Professor,
@@ -134,9 +145,9 @@ const Course = () => {
 				<div className="description-left-section">
 				<h1 className="course-description-header">{courses.ccode} - {courses.cname}</h1>
                         <p>{courses.cdesc}</p>
-						{/* <p>""{tagNames.map((tag) => {if (tag.value === 1) return (
+						<p>///**{tagNames.map((tag) => {if (tag.value === 1) return (
 							<div className="misc-tag">{tag.label}</div>
-							)})}""</p> */}
+							)})}**///</p>
 				</div>
 				
 				<div className="description-right-section">
@@ -145,7 +156,7 @@ const Course = () => {
 					<div className="workload-tag">workload: {Number(workloadsum/reviewsum).toFixed(1) || 0}/5</div>
 					<div className="misc-tag">Group Work</div>
 					<div className="misc-tag">Weekly quizzes</div>
-					<div className="misc-tag">Weekly quizzes</div>
+					<div className="misc-tag">Lab Component</div>
 				</div>
 			</div>
 
@@ -253,8 +264,9 @@ const Course = () => {
 
 				  <div className='course-reviews-container'>
 				<div className="review-left-section">
+				<p>{item.date}</p>
 
-					<p>Username: {userName}</p>
+					<p>Username: {item.username}</p>
 					<p>Professor: {item.professor}</p>
 					<p>Grade received: {item.grade}</p>
 				</div>
@@ -271,6 +283,7 @@ const Course = () => {
 							if (tag === 5) return (<div className="misc-tag">GPA Booster</div>)
 							if (tag === 6) return (<div className="misc-tag">Weekly Assignment</div>)
 
+							// {tag.tagName}
 						}
 						// <div className="misc-tag">{tag}</div>
 							)}
