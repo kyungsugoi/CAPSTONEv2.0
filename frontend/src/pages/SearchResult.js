@@ -19,6 +19,8 @@ function SearchResults() {
     const [filteredResults, setFilteredResults] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
+	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
+
     const fetchInfo = async() => {
         if (searchInput === "") {
             await axios
@@ -36,9 +38,53 @@ function SearchResults() {
     fetchInfo();
     } );
 
-    // const workloadsum = reviews.map(datum => datum.workload).reduce((a, b) => a + b, 0)
-	// const difficultysum = reviews.map(datum => datum.difficulty).reduce((a, b) => a + b, 0)
-	// const reviewsum = reviews.length
+	useEffect(() => {
+		const axiosTest = async () => {
+			try {
+				const response = await axios.get("http://127.0.0.1:8000/api/tags/");
+				// set tagNames map
+				const formattedTagNames = response.data.map(tag => ({
+					key: tag.tagid,
+					label: tag.tagname
+				}));
+	
+				setTagNames(formattedTagNames);
+			} catch (error) {
+				console.error("Error fetching tags:", error);
+			}
+		};
+	
+		axiosTest();
+	}, [data]);
+
+    const calculateTopTags = (reviews) => {
+        const tempTagNames = [];
+        reviews.forEach(review => {
+            if (review.tags) {
+                review.tags.forEach(tagId => {
+                    const tagIndex = tempTagNames.findIndex(tag => tag.key === tagId);
+                    if (tagIndex !== -1) {
+                        tempTagNames[tagIndex].value += 1;
+                    } else {
+                        tempTagNames.push({ key: tagId, value: 1 });
+                    }
+                });
+            }
+        });
+
+        return tempTagNames
+            .sort((a, b) => b.value - a.value)
+            .slice(0, 4);
+    };
+
+    const [topTags, setTopTags] = useState([]);
+
+	useEffect(() => {
+        if (data.length > 0) {
+            const topTagsForCourse = calculateTopTags(data[0].course || []);
+            setTopTags(topTagsForCourse);
+        }
+    }, [data]);
     
 
     const searchItems = (searchValue) => {
@@ -57,61 +103,79 @@ function SearchResults() {
 
 
 	return (
-        <div className='search-results'>
-			<Navbar/>
-            <div className='search-bar-container'>
-                <input
-                    type="search"
-                    placeholder="Search for course..."
-                    value={searchInput}
-                    onChange={(e) => searchItems(e.target.value)}
-                    className="search-input"
-                />
-            </div>
-
-            {searchInput.length > 1 ? (
-                filteredResults.slice(0, 5).map((item) => (
-                    <div
-                        className="search-course-information-container"
-                        key={item.cid}
-                        onClick={() => navigate(`/Course/${item.cid}`)}
-                    >
-                        <div className="description-left-section">
-                            <h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
-                            <p>{item.cdesc}</p>
-                        </div>
-                        <div className="description-right-section">
-                            <div className="difficulty-tag">Difficulty: {item.course.map(datum => datum.difficulty).reduce((a, b) => a + b, 0)/item.course.length || 0}/5</div>
-                            <div className="workload-tag">Workload: {item.course.map(datum => datum.workload).reduce((a, b) => a + b, 0)/item.course.length || 0}/5</div>
-                            <div className="workload-tag">Total Reviews: {item.course.length || 0}</div>
-                            {/* Add additional tags as needed */}
-                        </div>
-                    </div>
-                ))
-            ) : (
-                data.map((item) => (
-                    <div
-                        className="search-course-information-container"
-                        key={item.cid}
-                        onClick={() => navigate(`/Course/${item.cid}`)}
-                    >
-                        <div className="description-left-section">
-                            <h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
-                            <p>{item.cdesc}</p>
-                        </div>
-                        <div className="description-right-section">
-                            <div className="difficulty-tag">Difficulty: ({item.course.map(datum => datum.workload).reduce((a, b) => a + b, 0)/item.course.length})/5</div>
-                            <div className="workload-tag">Workload: {item.workload}/5</div>
-                            {/* Add additional tags as needed */}
-                        </div>
-                    </div>
-                ))
-            )}
+		<div className='search-results'>
+			<Navbar />
+			<div className='search-bar-container'>
+				<input
+					type="search"
+					placeholder="Search for course..."
+					value={searchInput}
+					onChange={(e) => searchItems(e.target.value)}
+					className="search-input"
+				/>
+			</div>
+	
+			{searchInput.length > 1 ? (
+				filteredResults.slice(0, 5).map((item) => {
+					const topTagsForCourse = calculateTopTags(item.course || []);
+					return (
+						<div
+							className="search-course-information-container"
+							key={item.cid}
+							onClick={() => navigate(`/Course/${item.cid}`)}
+						>
+							<div className="description-left-section">
+								<h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
+								<p>{item.cdesc}</p>
+							</div>
+							<div className="description-right-section">
+								<div className="difficulty-tag">Difficulty: {(item.course.map(datum => datum.difficulty).reduce((a, b) => a + b, 0) / item.course.length || 0).toFixed(1)}/5</div>
+								<div className="workload-tag">Workload: {(item.course.map(datum => datum.workload).reduce((a, b) => a + b, 0) / item.course.length || 0).toFixed(1)}/5</div>
+								<div className="workload-tag">Total Reviews: {item.course.length || 0}</div>
+								{/* Add additional tags as needed */}
+								{topTagsForCourse.map((tag) => (
+									<div key={tag.key} className="misc-tag">
+										{tagNames.find((tagName) => tagName.key === tag.key)?.label}
+									</div>
+								))}
+							</div>
+						</div>
+					);
+				})
+			) : (
+				data.map((item) => {
+					const topTagsForCourse = calculateTopTags(item.course || []);
+					return (
+						<div
+							className="search-course-information-container"
+							key={item.cid}
+							onClick={() => navigate(`/Course/${item.cid}`)}
+						>
+							<div className="description-left-section">
+								<h1 className="course-description-header">{item.ccode} - {item.cname}</h1>
+								<p>{item.cdesc}</p>
+							</div>
+							<div className="description-right-section">
+								<div className="difficulty-tag">Difficulty: {(item.course.map(datum => datum.difficulty).reduce((a, b) => a + b, 0) / item.course.length || 0).toFixed(1)}/5</div>
+								<div className="workload-tag">Workload: {(item.course.map(datum => datum.workload).reduce((a, b) => a + b, 0) / item.course.length || 0).toFixed(1)}/5</div>
+								<div className="workload-tag">Total Reviews: {item.course.length || 0}</div>
+								{/* Add additional tags as needed */}
+								{topTagsForCourse.map((tag) => (
+									<div key={tag.key} className="misc-tag">
+										{tagNames.find((tagName) => tagName.key === tag.key)?.label}
+									</div>
+								))}
+							</div>
+						</div>
+					);
+				})
+			)}
 			<div className="bottom-black-bar">
-                <p>@Edmonton,Alberta,Canada Macewan University 2023</p>
-            </div>
-        </div>
-    );
+				<p>@Edmonton,Alberta,Canada Macewan University 2023</p>
+			</div>
+		</div>
+	);
 }
+
 
 export default SearchResults;

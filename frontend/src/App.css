@@ -330,7 +330,7 @@
 }
 
 .review-middle-section {
-	font-size: 25px;
+	font-size: 20px;
 	flex: 2;
 }
 
@@ -633,6 +633,8 @@
 .add-review-btn {
 	background: linear-gradient(0deg, #ffc09f 0.03%, #f59c6e);
 	border-radius: 10px;
+	padding: 10px;
+	margin-left: 5%;
 }
 
 .image-container {
