@@ -639,6 +639,12 @@
 	position: relative;
 }
 
+.fox-gif {
+    width: 220px;
+    height: auto;
+    bottom: 25px; /* Adjust the value to move the fox image up */
+}
+
 .book-stack1 {
 	position: absolute;
 	left: 135px; /* Adjust the left position as needed */
@@ -647,25 +653,22 @@
 	height: 80%; /* Maintain aspect ratio */
 }
 
-.fox-gif {
-	width: 250px;
-	height: auto;
-	margin-bottom: 10px;
-}
+
+
 
 
 .grass {
 	position: absolute;
-	bottom: -110px;
-	left: 10px;
-	width: 115%; /* Full width of the container */
+	bottom: -135px;
+	right: -60px;
+	width: 140%; /* Full width of the container */
 	height: auto; /* Maintain aspect ratio */
 }
 
 .book-stack2 {
 	position: absolute;
 	left: -35px; /* Adjust the left position as needed */
-	bottom: -25px; /* Adjust the top position as needed */
+	bottom: -30px; /* Adjust the top position as needed */
 	width: 50%; /* Adjust the width as needed */
 	height:50%; /* Maintain aspect ratio */
 }

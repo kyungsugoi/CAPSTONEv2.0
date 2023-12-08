@@ -56,7 +56,20 @@ function Login(){
         <img src='/Logo.jpg' alt='' style={{ width: '350px', height: '100px' }}></img>
         <h3>~Student Login~</h3>
         
-        <div id="signInDiv" style={{ marginTop: '13px' }}></div>
+                {/* Modify the first textbox to have a placeholder for University */}
+                <div>
+                    <label htmlFor="university"></label>
+                    <input type="text" id="university" name="university" placeholder="Enter University here" />
+                </div>
+
+                {/* Modify the second textbox to have a placeholder for Graduation date */}
+                <div>
+                    <label htmlFor="graduationDate"></label>
+                    <input type="text" id="graduationDate" name="graduationDate" placeholder="Graduation date" />
+                </div>
+
+        
+        <div id="signInDiv" ></div>
 
 
         {Object.keys(user).length !== 0 && 

@@ -25,11 +25,7 @@ const Course = () => {
 
 	const[isOpen, setIsOpen] = useState(false);
 
-	// {Object.keys(user).length !== 0 ? (
-	// 	userName = user.username
-	// 	) : (
-	// 		userName
-	// 	)}
+
 
 
 	const workloadsum = courses.course?.map(datum => datum.workload).reduce((a, b) => a + b, 0)
@@ -108,11 +104,11 @@ const Course = () => {
 	const {Term, Year, Professor, Grade, Comment, Difficulty, Workload } = reviewData;
 
 	const handleAddReview = () => {
-
+{/*if Object.keys(user).length !== 0 is true (i.e., the user is logged in), it uses user.name; otherwise, it uses userName */}
 	axios
 		.post("http://127.0.0.1:8000/api/reviews/", {
 			course_id: params.id,
-			username: userName,
+			username: Object.keys(user).length !== 0 ? user.name : userName,
 			// date: localeDate,
 			term: Term,
 			year: Year,
