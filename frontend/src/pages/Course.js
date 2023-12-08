@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 import '../App.css';
 import Popup from './popup';
 import CustomSelect from './CustomSelect';
@@ -60,18 +60,34 @@ const Course = () => {
 	const axiosTest = async () => {
 		try {
 		const response = await axios.get("http://127.0.0.1:8000/api/tags/");
+		// set tagNames map
 		const formattedTagNames = response.data.map(tag => ({
-			value: tag.tagid, // or use another unique identifier from your data
-			label: tag.tagname // or use another property that represents the tag name
+			key: tag.tagid, 
+			value: 0,
+			label: tag.tagname
+			 
 		}));
-		setTagNames(formattedTagNames);
+
+		if (courses.course) {
+			courses.course.forEach(review => {
+			  if (review.tags) {
+				review.tags.forEach(tagId => {
+				  const tagIndex = formattedTagNames.findIndex(tag => tag.key === tagId);
+				  if (tagIndex !== -1) {
+					formattedTagNames[tagIndex].value += 1;
+				  }
+				});
+			  }
+			});
+		  }
+		  setTagNames(formattedTagNames);
 		} catch (error) {
 		console.error("Error fetching tags:", error);
 		}
 	};
 
 	axiosTest();
-	}, []);
+	}, [courses.course]);
 
 	const localeDate = (new Date()).toLocaleDateString();
   	const [tags, setTags] = useState();	
@@ -98,7 +114,7 @@ const Course = () => {
 	const handleTags = (e) => {
 		// const {value, label} = e.target;
 
-		setTags(Array.isArray(e) ? e.map(x => x.value) : {});
+		setTags(Array.isArray(e) ? e.map(x => x.key) : {});
 	};
 
 	// const counttags = (e) => {
@@ -124,8 +140,6 @@ const Course = () => {
 			tags: tags,
 		})
 		.then((res) => togglePopup(), window.location.reload())
-		// .then((res) => togglePopup(), navigate(`/Course/${params.id}`))
-		// .then((res) => togglePopup(), refreshList())
 
 		.catch(function(error) {
 			console.log(error);
@@ -133,6 +147,13 @@ const Course = () => {
 
 	};
 
+	// gets the top 4 tags in use
+	const topTags = tagNames
+  	.filter((tag) => tag.value > 0)
+  	.sort((a, b) => b.value - a.value)
+  	.slice(0, 4);
+
+	console.log(topTags);
 
 	// const {state} = useLocation();
     // const {id, code, name, description} = state;
@@ -145,18 +166,17 @@ const Course = () => {
 				<div className="description-left-section">
 				<h1 className="course-description-header">{courses.ccode} - {courses.cname}</h1>
                         <p>{courses.cdesc}</p>
-						<p>///**{tagNames.map((tag) => {if (tag.value === 1) return (
-							<div className="misc-tag">{tag.label}</div>
-							)})}**///</p>
 				</div>
 				
 				<div className="description-right-section">
 					<div className="total-tag"> Total Reviews: {reviewsum}</div>
 					<div className="difficulty-tag">Difficulty: {Number(difficultysum/reviewsum).toFixed(1) || 0}/5</div>
 					<div className="workload-tag">workload: {Number(workloadsum/reviewsum).toFixed(1) || 0}/5</div>
-					<div className="misc-tag">Group Work</div>
-					<div className="misc-tag">Weekly quizzes</div>
-					<div className="misc-tag">Lab Component</div>
+					{topTags.map((tag) => (
+       				 	<div key={tag.key} className="misc-tag">
+         					{tag.label}
+        				</div>
+     				))}
 				</div>
 			</div>
 
@@ -226,7 +246,7 @@ const Course = () => {
 						placeholder='Workload(1-5)'
 					/>
 
-					<CustomSelect isMulti={true} value={tagNames.filter(obj => tags?.includes(obj?.value))} onChange={handleTags} tagNames={tagNames} />
+					<CustomSelect isMulti={true} value={tagNames.filter(obj => tags?.includes(obj?.key))} onChange={handleTags} tagNames={tagNames} />
 					
 					<button onClick={handleAddReview} type="button">Submit Review</button>
 					{/* <button onClick={() => {
@@ -291,12 +311,6 @@ const Course = () => {
 			</div> 
               );
             })}
-			
-
-
-
-
-
 
 			<div className="bottom-black-bar">
                 <p>@Edmonton,Alberta,Canada Macewan University 2023</p>
