@@ -3,6 +3,8 @@ import { useState } from 'react';
 import '../App.css';
 import { useUser } from '../UserContext'; // Import the useUser hook
 import Navbar from './navbar';
+import { useLocation } from 'react-router-dom';
+
 
 function ViewProfile() {
   const { user } = useUser(); // Access user data from the context
@@ -12,10 +14,27 @@ function ViewProfile() {
     setState(index)
   }
 
+  const location = useLocation();
+    const university = location.state && location.state.university;
+    const graduationDate = location.state && location.state.graduationDate;
+
+
   return (
     <div className='App'>
       <Navbar/>
-      <div className='greeting-text'> Hey,{user.name}</div>
+      <div className='greeting-text'>{Object.keys(user).length !== 0 ? (
+      <div>
+        {/* if logged in */}
+        Hey,{user.name}
+       
+      </div>
+    ) : (
+      <div>
+        {/* if not logged in */}
+        <p>Hey, Anonymous</p>
+      </div>
+    )}
+    </div>
       <div className='box-view'>
         <div className='tabs'>
 
@@ -34,27 +53,45 @@ function ViewProfile() {
 
       {/* contents */}
       <div className='contents'>
-      <div className={`${state === 1 ? "content active-content" : "content"}`}>
-        <p> Name: {user.name}</p>
-        <p>School: Macewan University</p>
-        <p>Expected Year of Graduation: 2024</p>
-        </div>
-
-
-        <div className={`${state === 2 ? "content active-content" : "content"}`}>
-        <p>Email: {user.email} </p>
-        <p>password: ******</p>
-        
-        </div>
-
-        <div className={`${state === 3 ? "content active-content" : "content"}`}>
-        <p></p>
-        <p>GPA booster,Project based,Low Workload
-          Group-work</p></div>
-
-
-
+  <div className={`${state === 1 ? "content active-content" : "content"}`}>
+    {Object.keys(user).length !== 0 ? (
+      <div>
+        {/* if logged in */}
+        <p>Name: {user.name}</p>
+        <p>University: {university}</p>
+        <p>Graduation Date: {graduationDate}</p>
       </div>
+    ) : (
+      <div>
+        {/* if not logged in */}
+        <p>Name: Anonymous</p>
+        <p>School: Student of the world</p>
+        <p>Expected Year of Graduation: N/A</p>
+      </div>
+    )}
+  </div>
+
+  <div className={`${state === 2 ? "content active-content" : "content"}`}>
+    {Object.keys(user).length !== 0 ? (
+      <div>
+        {/* if logged in */}
+        <p>Email: {user.email}</p>
+        <p>Password: **********</p>
+      </div>
+    ) : (
+      <div>
+        {/* if not logged in */}
+        <p>Email: Google email here</p>
+        <p>Password: not given</p>
+      </div>
+    )}
+  </div>
+
+  <div className={`${state === 3 ? "content active-content" : "content"}`}>
+    <p></p>
+    <p>GPA booster, Project based, Low Workload Group-work</p>
+  </div>
+</div>
 
       </div>
 

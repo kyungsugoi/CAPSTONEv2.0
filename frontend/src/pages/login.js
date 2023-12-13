@@ -21,7 +21,10 @@ function Login(){
         console.log("hello",userObject);
         setUser(userObject);
         document.getElementById("signInDiv").hidden = true;
-        navigate('/');
+        navigate('/ViewProfile', {
+            state: { university: document.getElementById("university").value, graduationDate: document.getElementById("graduationDate").value }
+        });
+        // navigate('/');
         
     }
 
