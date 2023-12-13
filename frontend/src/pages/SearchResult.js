@@ -23,7 +23,7 @@ function SearchResults() {
 
     const fetchInfo = async() => {
         if (searchInput === "") {
-            await axios
+            return axios
             .get(`${url}?ccode=${search}`)
             .then((res) => setData(res.data));
         }

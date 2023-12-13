@@ -44,6 +44,7 @@ const Course = () => {
 	}
 
 	const [tagNames, setTagNames] = useState([]); // Initialize tagNames list
+	const [tallyTagNames, setTallyTagNames] = useState([]); // Initialize tagNames list
 	const { user } = useUser(); // Access user data from the context
 	const [userName, setUserName] = useState(user.name); // State variable to store user name
 
@@ -57,26 +58,33 @@ const Course = () => {
 		try {
 		const response = await axios.get("http://127.0.0.1:8000/api/tags/");
 		// set tagNames map
-		const formattedTagNames = response.data.map(tag => ({
-			key: tag.tagid, 
+		const formattedTagNames = response.data.map(tag => ({ 
+			value: tag.tagid,
+			label: tag.tagname
+			 
+		}));
+		setTagNames(formattedTagNames);
+
+		// set tagNames map
+		const talliedTagNames = response.data.map(tag => ({ 
+			key: tag.tagid,
 			value: 0,
 			label: tag.tagname
 			 
 		}));
-
 		if (courses.course) {
 			courses.course.forEach(review => {
 			  if (review.tags) {
 				review.tags.forEach(tagId => {
-				  const tagIndex = formattedTagNames.findIndex(tag => tag.key === tagId);
+				  const tagIndex = talliedTagNames.findIndex(tag => tag.key === tagId);
 				  if (tagIndex !== -1) {
-					formattedTagNames[tagIndex].value += 1;
+					talliedTagNames[tagIndex].value += 1;
 				  }
 				});
 			  }
 			});
 		  }
-		  setTagNames(formattedTagNames);
+		  setTallyTagNames(talliedTagNames); 
 		} catch (error) {
 		console.error("Error fetching tags:", error);
 		}
@@ -110,7 +118,7 @@ const Course = () => {
 	const handleTags = (e) => {
 		// const {value, label} = e.target;
 
-		setTags(Array.isArray(e) ? e.map(x => x.key) : {});
+		setTags(Array.isArray(e) ? e.map(x => x.value) : {});
 	};
 
 	// const counttags = (e) => {
@@ -144,7 +152,7 @@ const Course = () => {
 	};
 
 	// gets the top 4 tags in use
-	const topTags = tagNames
+	const topTags = tallyTagNames
   	.filter((tag) => tag.value > 0)
   	.sort((a, b) => b.value - a.value)
   	.slice(0, 4);
@@ -242,7 +250,7 @@ const Course = () => {
 						placeholder='Workload(1-5)'
 					/>
 
-					<CustomSelect isMulti={true} value={tagNames.filter(obj => tags?.includes(obj?.key))} onChange={handleTags} tagNames={tagNames} />
+					<CustomSelect isMulti={true} value={tagNames.filter(obj => tags?.includes(obj?.value))} onChange={handleTags} tagNames={tagNames} />
 					
 					<button onClick={handleAddReview} type="button">Submit Review</button>
 					{/* <button onClick={() => {
