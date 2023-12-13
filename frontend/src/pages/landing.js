@@ -98,14 +98,6 @@ function LandingPage() {
                 <div className='search-bar-container'>
                 <SearchResults/>
                 </div>
-                
-				{/*<div className="Course-Placeholder">
-					<button className="course-button" onClick={() => navigate('/search')}>
-						View All Courses
-					</button>
-				</div>
-                <button className="course-button" onClick={handleCourseClick}>
-                View Courses</button> */}
             </div>
 
             <div className="content-container">
