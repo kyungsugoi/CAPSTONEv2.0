@@ -3,6 +3,7 @@ import { useState } from 'react';
 import '../App.css';
 import { useUser } from '../UserContext'; // Import the useUser hook
 import Navbar from './navbar';
+import { useLocation } from 'react-router-dom';
 
 
 function ViewProfile() {
@@ -12,6 +13,10 @@ function ViewProfile() {
   const action =(index) => {
     setState(index)
   }
+
+  const location = useLocation();
+    const university = location.state && location.state.university;
+    const graduationDate = location.state && location.state.graduationDate;
 
 
   return (
@@ -53,8 +58,8 @@ function ViewProfile() {
       <div>
         {/* if logged in */}
         <p>Name: {user.name}</p>
-        <p>School:Macewan University</p>
-        <p>Expected Year of Graduation: 2024</p>
+        <p>University: {university}</p>
+        <p>Graduation Date: {graduationDate}</p>
       </div>
     ) : (
       <div>
